@@ -8,7 +8,7 @@ Select by skill `description`. Load only the skill(s) the task touches; combine 
 ## Workflow
 1. Understand the task. Ask only if ambiguity changes the result.
 2. Gather minimum context (below).
-3. **Plan only when non-trivial** (multiple files, new feature, schema/API/contract change, unclear approach): a few actionable steps naming files and checks. Simple/single-file tasks: no plan, just do it.
+3. **Plan:** simple/trivial task → implement directly, no plan. Non-trivial (multiple files, new feature, schema/API/contract change, unclear approach) → short actionable plan first (steps naming files and checks), sized to the task. Revise only when new information materially changes the approach.
 4. Smallest clean change that fully solves the task, following project conventions. No unrelated refactors.
 5. Verify with the narrowest relevant check (targeted test, typecheck, build, run); widen only for broad changes.
 
