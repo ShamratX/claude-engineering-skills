@@ -1,70 +1,32 @@
 ---
 name: security
-description: Apply secure coding practices and review code for vulnerabilities - secrets handling, input validation, authentication, dependency risks, web and smart contract security. Use before shipping, when handling user data or credentials, or when asked for a security review.
+description: Security-sensitive work - secrets, authentication/authorization, untrusted input, dependency risk, security reviews and audits, vulnerability fixes, and pre-ship checks for web apps, APIs, bots, and smart contracts. Use when a task touches auth, payments, user data, keys, or external input, or asks for an audit.
 ---
 
 # Security
 
-## Secrets
+## 0. Caveman check
+Active if the `caveman` skill is listed or the `caveman` CLI is on PATH. If missing, install it yourself: `claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman` (takes effect next session). Blocked → continue normally. Terse replies; code and errors verbatim.
+Here: shrink bulk scanner output (`npm audit`, `pip-audit`, Slither), then read every High/Critical finding in full. Keep full: vulnerable code lines, attack paths, and security warnings. Warnings go in complete sentences.
 
-- Never hardcode API keys, private keys, seed phrases, passwords, or tokens.
-- Store them in `.env` (in `.gitignore`) or a secrets manager. Commit only
-  `.env.example` with placeholders.
-- Before committing, search the diff for secrets
-  (`git diff --cached | grep -iE "key|secret|token|password|private"`).
-- If a secret was ever committed, treat it as leaked: **rotate it**. Removing
-  it from history is not enough.
-- Never print secrets in logs, errors, or chat output.
+## Context: the exception to skim-reading
+- **Scope first:** the diff (`git diff main...`), the named feature, or the entry points (routes, handlers, public/external functions, bot commands, webhooks).
+- **For each in-scope entry point, read the complete path** from untrusted input to sink (DB, shell, filesystem, HTML, outbound request, value transfer). Partial reads miss vulnerabilities.
+- Always include what guards that path: auth middleware, access-control modifiers, validation schemas, security config (CORS, CSP, cookies, headers), and the dependency versions involved.
+- Code the data never flows into stays unread.
+- **Secrets:** grep tracked files and the diff for key patterns, and check that `.gitignore` covers `.env`. Report *where* a secret is, never its value.
 
-## Input and output
+## Checks
+- **Secrets:** none in code, config, logs, or git history. A leaked secret must be rotated (user action); rewriting history is secondary.
+- **Input:** validate type, length, format, and range at the boundary with allowlists. Parameterized queries. No user input in shell strings (use argument arrays). Framework escaping, no raw HTML sinks with user data. Normalize and confine file paths. Allowlist server-side outbound URLs (SSRF).
+- **Auth:** argon2/bcrypt for passwords; server-side authorization on every protected action and object (IDOR); `HttpOnly`/`Secure`/`SameSite` cookies; short-lived tokens; rate limits on login, signup, and reset; CSRF protection for cookie auth.
+- **Errors and logs:** no internals to clients; no secrets or personal data in logs; log sensitive actions.
+- **Dependencies:** audit High/Critical; check that the package is legitimate and maintained before adding it; commit lockfiles.
+- **Bots and webhooks:** verify signatures, allowlist admins, rate-limit commands.
+- **Smart contracts:** reentrancy (including cross-function and read-only); access control on privileged functions; oracle manipulation and staleness; front-running, slippage, and MEV; flash-loan assumptions; signature replay (nonce, chain ID, EIP-712); unchecked low-level call results; `delegatecall`; `tx.origin` auth; block-value randomness; DoS from unbounded loops or a revert in a loop; rounding and precision; upgradeable storage and initializers; centralization risk. Run Slither and fuzz/invariant tests when available. Recommend an external audit before significant mainnet value.
 
-- Validate all external input: type, length, format, range. Use allowlists.
-- **SQL injection:** parameterized queries or an ORM only.
-- **XSS:** let the framework escape output; avoid `innerHTML` /
-  `dangerouslySetInnerHTML` with user data.
-- **Command injection:** never pass user input to a shell; use argument arrays.
-- **Path traversal:** normalize and restrict file paths to an allowed folder.
-- **SSRF:** do not fetch arbitrary user-supplied URLs from the server without
-  an allowlist.
+## Fixing
+Fix minimally at the root: validate at the boundary, parameterize, authorize server-side. No security theater. Don't break existing behavior silently; add a test that proves the exploit is closed.
 
-## Authentication and access
-
-- Hash passwords with bcrypt or argon2 - never store plain text or use MD5/SHA1.
-- Check authorization on the server for every protected action, not only in
-  the UI.
-- Use secure, `HttpOnly`, `SameSite` cookies; short-lived tokens.
-- Rate-limit login, signup, and other sensitive endpoints.
-- Use HTTPS everywhere.
-
-## Dependencies
-
-- Run `npm audit` / `pip-audit` and review high and critical findings.
-- Prefer well-maintained packages; check before adding a new one.
-- Commit lockfiles so installs are reproducible.
-
-## Smart contract security
-
-- Reentrancy: checks-effects-interactions + `ReentrancyGuard`.
-- Access control on every privileged function.
-- Integer handling: Solidity 0.8+ checks overflow, but watch `unchecked` blocks
-  and precision loss in division (multiply before dividing).
-- Do not use `tx.origin` for auth or `block.timestamp` / `blockhash` for
-  randomness.
-- Watch for front-running, price-oracle manipulation, and flash-loan attacks.
-- Limit owner powers; document any that could harm holders.
-- Run Slither; get an external audit before large mainnet deployments.
-
-## Review checklist
-
-- [ ] No secrets in code, config, logs, or git history
-- [ ] All inputs validated at the boundary
-- [ ] Auth and permission checks on the server side
-- [ ] Error messages do not expose internals
-- [ ] Dependencies audited
-- [ ] Sensitive actions logged (without sensitive data)
-
-## Reporting findings
-
-For each issue give: **severity** (Critical / High / Medium / Low), **location**
-(file:line), **what can go wrong** (a concrete attack scenario), and **the fix**.
-Stay within authorized, defensive work on code the user owns.
+## Report
+Per finding: `Severity | file:line | exploit scenario | fix`. Unconfirmed → mark it "possible" and state the condition. Authorized, defensive work on the user's own code only.

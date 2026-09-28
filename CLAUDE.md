@@ -1,58 +1,73 @@
-# Claude Engineering Skills
+# Engineering Rules
 
-A reusable set of engineering skills for Claude Code. Each skill lives in
-`skills/<name>/SKILL.md` and holds the conventions, workflow, and checklists
-for one kind of work.
+Core: **minimum context → maximum relevant information → minimum output.**
 
-## How to use this repo
+## Skills: load only what the task touches
 
-- **Per project:** copy (or symlink) the skills you need into the project's
-  `.claude/skills/` folder.
-- **Globally:** copy them into `~/.claude/skills/` so every project can use them.
-- Claude loads a skill automatically when the task matches its `description`,
-  or you can call it by name (for example `/debugging`).
+| Task signal | Skill |
+|---|---|
+| Website, frontend, backend, API, CMS, UI | `web-development` |
+| Solidity, smart contract, EVM, DeFi, dApp, wallet, Hardhat/Foundry | `web3-development` |
+| Scraper, bot, browser automation, scheduled job, email/SMS/message sending | `automation-bots` |
+| Error, crash, failing build, wrong behavior, regression | `debugging` |
+| Write, fix, or run tests; coverage; flaky tests | `testing` |
+| Secrets, auth, untrusted input, audit, vulnerability, pre-ship review | `security` |
 
-## Available skills
+- Cross-domain task → combine only the skills it touches (contract audit → `web3-development` + `security`; broken bot → `automation-bots` + `debugging`).
+- No match (docs, small config edit, question) → no skill. These rules are enough.
+- Never load a skill "just in case".
 
-| Skill | Use it for |
-|-------|-----------|
-| [web-development](skills/web-development/SKILL.md) | Frontend and backend web apps, APIs, UI work |
-| [web3-development](skills/web3-development/SKILL.md) | Smart contracts, Hardhat/Foundry, dApps, wallets |
-| [automation-bots](skills/automation-bots/SKILL.md) | Scrapers, Telegram/Discord bots, scheduled jobs, browser automation |
-| [debugging](skills/debugging/SKILL.md) | Finding and fixing the root cause of a bug |
-| [testing](skills/testing/SKILL.md) | Writing and running unit, integration, and e2e tests |
-| [security](skills/security/SKILL.md) | Secure coding, secret handling, reviews before shipping |
+## Workflow
 
-## Global working rules
+1. Understand the task. Ask only if the ambiguity would change the result.
+2. Pick skill(s).
+3. Gather minimum context (below).
+4. Understand the current implementation and architecture before editing. Preserve it when reasonable.
+5. Make a focused change. No unrelated refactors, rewrites, new dependencies, or abstractions.
+6. Verify with the narrowest relevant check (targeted test, typecheck, build, run). Widen only if the change is broad.
+7. Report tersely.
 
-These apply to every task, whichever skill is active.
+## Context strategy
 
-1. **Read before writing.** Look at the existing code, config, and conventions
-   before changing anything. Match the style that is already there.
-2. **Small, focused changes.** Change only what the task needs. No drive-by
-   refactors unless asked.
-3. **Never commit secrets.** Keys, private keys, seed phrases, tokens, and
-   `.env` files stay out of git. Use `.env.example` with placeholder values.
-4. **Verify your work.** Run the build, the linter, and the tests that cover
-   the change. Report failures honestly, with the output.
-5. **Ask before irreversible actions.** Deploying to mainnet, deleting data,
-   force-pushing, or sending messages to real users needs explicit approval.
-6. **Explain the why.** Commit messages and PR descriptions say why the change
-   was made, not only what changed.
+Don't read everything. Don't ignore everything. Read what is necessary.
 
-## Adding a new skill
+- **Anchor first.** Start from what the task names: files, symbols, error text, stack frames, routes, commands, failing tests.
+- **Locate before reading.** Narrow Grep/Glob for the symbol or string. Read the hits, not the folder.
+- **Read slices.** Large file → find line numbers, read that range plus what it needs (imports, enclosing function/class).
+- **Expand one hop at a time** along real links: callers, callees, types, config it reads, tests that cover it. Stop when you can explain current behavior and the effect of your change.
+- **No blanket skips.** Lockfiles, config, generated code, logs, vendored deps, and build output are *low priority, not forbidden*. Read them (targeted) when the task points there: version question → lockfile entry; build/env issue → config; runtime failure → the relevant log lines; generated-code bug → generator and its output.
+- **Relevance test** before opening a file: does it define, call, configure, test, or document the thing being changed? No → skip. Unsure → grep it instead of reading it whole.
+- Orient with the manifest (`package.json`, `pyproject.toml`, ...) and a listing of the relevant directory, not a repo-wide scan.
+- Don't re-read files already in context unless they changed.
+- Location unknown and search is broad → one Explore subagent that returns paths and conclusions, not file dumps.
+- Never guess what an unread file contains. If correctness depends on it, read it.
 
-1. Create `skills/<skill-name>/SKILL.md` (lowercase, hyphenated name).
-2. Start the file with frontmatter:
+## Caveman
 
-   ```markdown
-   ---
-   name: skill-name
-   description: One or two sentences on what the skill does and when to use it.
-   ---
-   ```
+Official repo: https://github.com/JuliusBrussee/caveman. Every skill starts with a Caveman check. For no-skill tasks, apply this:
 
-3. Keep the body practical: workflow steps, conventions, checklists, and
-   common mistakes. Put long reference material in extra files next to
-   `SKILL.md` and link to them.
-4. Add the skill to the table above.
+- **Detect:** `caveman` skill is listed, or the `caveman` CLI is on PATH.
+- **Missing:** install it yourself, no tutorial to the user: `claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman` (fallback: `npx skills add JuliusBrussee/caveman -g`). It takes effect next session; continue now. Blocked (network, permissions) → one-line note, continue normally.
+- **Replies:** caveman style (`full` default, `lite` when the user needs an explanation). Code, commands, paths, and exact errors stay verbatim.
+- **Noisy commands** (tests, builds, installs, logs), when the CLI exists: `caveman shrink -- <cmd>`. Need an omitted detail → `caveman retrieve <handle> [query]`, or rerun without shrink.
+- **Never** act on compressed output that hides the detail you need. Don't shrink short output or output where every line matters (the one failing trace, a diff under review).
+
+## Accuracy
+
+Never invent APIs, commands, packages, flags, config keys, versions, features, limits, pricing, or error causes. Version-dependent → check the installed version (manifest/lockfile) or official docs. Not verified → say so.
+
+## Output
+
+- Final reply: what changed (`file:line`), how it was verified, open risks. A few lines.
+- Don't restate the task, explain obvious code, or paste large files, logs, or diffs. Quote only the decisive lines.
+- Report failures honestly, with the key output lines.
+
+## Safety
+
+- Never commit secrets (keys, seed phrases, tokens, `.env`). Use `.env.example` with placeholders.
+- Ask first before irreversible or outward actions: mainnet deploys, deleting data, force-push, messaging real people, paid API spend.
+- Commit and PR messages say why.
+
+## This repo
+
+Skills live in `skills/<name>/SKILL.md`. To use them, copy the skills into `~/.claude/skills/` (global) or `<project>/.claude/skills/`, and copy every section above this one into `~/.claude/CLAUDE.md`. To add a skill: lowercase-hyphen folder, frontmatter `name` plus a trigger-rich `description`, open with the Caveman check, keep only domain content, add a row to the table.
