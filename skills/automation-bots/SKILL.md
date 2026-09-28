@@ -1,6 +1,6 @@
 ---
 name: automation-bots
-description: Scrapers, crawlers, Telegram/Discord/Slack bots, browser automation (Playwright, Puppeteer, Selenium), scheduled/cron jobs, workflow automation, and email/SMS/message sending. Use for unattended jobs that talk to external sites or services. Not for browser e2e tests of your own app (testing).
+description: Scrapers, crawlers, Telegram/Discord/Slack/WhatsApp bots, browser automation (Playwright, Puppeteer, Selenium), scheduled/cron jobs, workflow automation, and email/SMS/message sending. Use for unattended jobs that talk to external sites or services. Not for browser e2e tests of your own app (testing).
 ---
 
 # Automation & Bots

@@ -29,10 +29,10 @@ Don't read everything. Don't ignore everything. Read what is necessary.
 
 ## Caveman
 Official: https://github.com/JuliusBrussee/caveman. Each skill's `Caveman:` line names what to shrink and what to keep in full there.
-- **Detect:** a `caveman` skill is listed, or the `caveman` CLI is on PATH.
-- **Missing:** install it yourself, no tutorial: `claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman`. It activates next session; continue now. Blocked → one-line note, continue normally.
+- **Two parts, check separately:** the reply-style skill (a `caveman` skill is listed) and the CLI (`caveman` on PATH). A CLI or a skill folder outside Claude Code's skill list doesn't make the skill active.
+- **Skill not listed:** install it yourself, no tutorial: `claude plugin marketplace add JuliusBrussee/caveman && claude plugin install caveman@caveman`. It activates next session; continue now. Blocked → one-line note, continue normally.
 - **Replies:** caveman style (auto-activated by the plugin; otherwise `/caveman`). Code, commands, paths, exact errors, and security warnings stay verbatim.
-- **Noisy output** (CLI present): `caveman shrink -- <cmd>`. Need an omitted detail → `caveman retrieve <handle> [query]` or rerun unshrunk. Never act on output that hides what you need. Don't shrink short output.
+- **Noisy output** (CLI present): `caveman shrink -- <cmd>`. Need an omitted detail → `caveman retrieve <handle> [query]` (the handle is printed after shrunk output) or rerun unshrunk. Never act on output that hides what you need. Don't shrink short output.
 
 ## Accuracy
 Never invent APIs, commands, packages, flags, config keys, versions, features, limits, pricing, or error causes. Version-dependent → check the installed version or official docs. Unverified → say so.
@@ -46,4 +46,4 @@ Final reply: what changed (`file:line`), how verified, open risks. A few lines. 
 - Commit/PR messages say why.
 
 ## This repo
-Install: copy `skills/*` to `~/.claude/skills/` (or `<project>/.claude/skills/`) and the sections above into `~/.claude/CLAUDE.md`. New skill: `skills/<name>/SKILL.md`, frontmatter `name` + precise `description` (triggers and exclusions), a `Caveman:` line, and domain-only rules.
+Install and adding skills: see `README.md`. Installed copies in `~/.claude/` don't auto-update: after editing `CLAUDE.md` or a skill here, re-run the install commands.
