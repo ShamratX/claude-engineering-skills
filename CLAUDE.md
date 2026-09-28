@@ -3,16 +3,7 @@
 Core: **minimum context → maximum relevant information → minimum output.**
 
 ## Skills
-Load only the skill(s) the task touches; combine for cross-domain work (contract audit → `web3-development` + `security`). No match → none. Never "just in case".
-
-| Signal | Skill |
-|---|---|
-| Website, frontend, backend, API, CMS | `web-development` |
-| Solidity, EVM, DeFi, dApp, wallet, Hardhat/Foundry | `web3-development` |
-| Scraper, bot, browser automation, scheduled job, email/SMS/message sending | `automation-bots` |
-| Error, crash, failing build, wrong behavior, regression | `debugging` |
-| Write/run/fix tests, coverage, flaky tests | `testing` |
-| Audit, vulnerability, secrets, auth/permission logic, pre-ship review | `security` |
+Select by skill `description`. Load only the skill(s) the task touches; combine for cross-domain work (contract audit → `web3-development` + `security`; broken bot → `automation-bots` + `debugging`). No match → none. Never "just in case".
 
 ## Workflow
 1. Understand the task. Ask only if ambiguity changes the result.
@@ -55,4 +46,4 @@ Final reply: what changed (`file:line`), how verified, open risks. A few lines. 
 - Commit/PR messages say why.
 
 ## This repo
-Install: copy `skills/*` to `~/.claude/skills/` (or `<project>/.claude/skills/`) and the sections above into `~/.claude/CLAUDE.md`. New skill: `skills/<name>/SKILL.md`, frontmatter `name` + precise `description` (triggers and exclusions), a `Caveman:` line, domain-only rules, and a row in the table.
+Install: copy `skills/*` to `~/.claude/skills/` (or `<project>/.claude/skills/`) and the sections above into `~/.claude/CLAUDE.md`. New skill: `skills/<name>/SKILL.md`, frontmatter `name` + precise `description` (triggers and exclusions), a `Caveman:` line, and domain-only rules.
