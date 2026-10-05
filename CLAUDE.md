@@ -65,6 +65,15 @@ Store: `{{MEMORY_ROOT}}`. Format and rules: its `README.md` (read before the fir
 - New features: simplest production-ready structure with clear responsibilities that fits the project.
 - No speculative abstractions, layers, dependencies, services, or microservices. Weigh maintainability, security, scalability, and extension only where the decision actually affects them.
 
+## Language and project hygiene
+For website, web app, dApp, frontend, and backend code; an explicit user request overrides.
+- **JavaScript, not TypeScript:** write JavaScript. No TypeScript, `.ts`, or `.tsx` unless the user asks for TypeScript. Existing TypeScript project → keep it; never migrate to JavaScript unless asked. TypeScript examples in skill references → adapt to JavaScript.
+- **No Python by default:** use the project's JavaScript/Node.js stack. Python only when genuinely required with no reasonable non-Python option; say why. Never add Python for convenience, scripting, automation, or habit. Internal repo tooling (e.g. validation scripts) is exempt.
+- **Project clean:** keep only files, folders, dependencies, assets, components, code, and config needed for development, build, deployment, docs, config, or runtime. No files added for convenience.
+  - No screenshots, reference/temporary images, downloaded assets, mockups, design previews, test artifacts, generated files, unused components/code, duplicates, or obsolete files. Dev-only reference images never stay unless the live site/app uses them. Remove your temporary artifacts when done.
+  - Before calling a feature or project complete, check for unused files/assets, dead code, duplicates, unneeded dependencies, and temporary artifacts.
+  - Delete only what is verified unused (references and role checked). Unclear purpose → keep and report. Pre-existing files you didn't create → list and ask before deleting.
+
 ## Output
 Final reply: what changed (`file:line`), how verified, open risks. A few lines. No restating the task, explaining obvious code, or pasting large files/logs/diffs. Report failures honestly with the key lines.
 
