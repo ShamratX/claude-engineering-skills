@@ -157,7 +157,7 @@ def check_memory():
             err(f"{r}: missing or invalid 'updated: YYYY-MM-DD' front matter")
         elif (TODAY - updated).days > STALE_DAYS:
             warn(f"{r}: not updated for {(TODAY - updated).days} days; review for staleness")
-        if f.name == "INDEX.md":
+        if f.name == "INDEX.md" or f.parent.name == "research":  # research notes use their own format
             continue
         for i, line in enumerate(text.splitlines(), 1):
             if not line.startswith("- "):

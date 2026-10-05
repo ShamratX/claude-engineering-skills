@@ -12,6 +12,7 @@ projects/<slug>/tasks.md     Pending / Known issues / Done (recent)
 projects/<slug>/decisions.md decision log, newest first
 projects/<slug>/sessions.md  compact session summaries, newest first
 projects/<slug>/research.md  research conclusions with source and review date (create when needed)
+projects/<slug>/research/<topic>.md  resumable deep-research notes (format: research skill references/evidence-notes.md)
 _template/                   copy from here for a new project
 ```
 `<slug>` = project folder name, lowercase, hyphens (`Email sender bot` → `email-sender-bot`).

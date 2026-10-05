@@ -46,7 +46,7 @@ The system covers 11 core capabilities with 14 modular skills.
 | SEO and website content | `seo-content` | In-house + adapted references |
 | Backend / CMS (any stack) | `web-development` | In-house |
 | Design diversity (anti-generic design) | `frontend-design` | Copied from Anthropic, unmodified |
-| Research | `research` | In-house |
+| Research (quick / standard / deep, resumable) | `research` | In-house + adapted verification references |
 
 Additional domain skills: `web3-development` (Solidity, dApps, Hardhat/Foundry) and `automation-bots` (scrapers, bots, scheduled jobs, messaging).
 
@@ -277,6 +277,7 @@ Format and rules: [`memory/README.md`](memory/README.md).
 | greensock/gsap-skills | `motion/references/gsap` | MIT |
 | vercel-labs/agent-skills | `web-development/references/react` | MIT |
 | coreyhaines31/marketingskills | `seo-content/references` | MIT |
+| daymade/claude-code-skills | `research/references` | MIT |
 
 ---
 
