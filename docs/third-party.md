@@ -4,3 +4,4 @@ Every file copied or adapted from outside this repo. Copies are pinned; nothing 
 
 | Skill path | Source | Author | License | Commit | Audited | Changes | Reason |
 |---|---|---|---|---|---|---|---|
+| `skills/frontend-design/` | [anthropics/skills](https://github.com/anthropics/skills) `skills/frontend-design` | Anthropic | Apache-2.0 | `8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4` | 2026-10-05 | None | First-party anti-generic visual design guidance |

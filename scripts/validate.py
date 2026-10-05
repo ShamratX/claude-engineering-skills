@@ -90,7 +90,7 @@ def check_skills():
         elif len(desc) > 1024:
             err(f"{rel(f)}: description {len(desc)} chars > 1024")
         size = len(text.encode("utf-8"))
-        if size > SKILL_WARN_BYTES:
+        if size > SKILL_WARN_BYTES and not (d / "SOURCE.md").exists():  # copied files stay unmodified
             warn(f"{rel(f)}: {size} bytes; move detail into a reference file")
         check_skill_files(d, text)
         skills[name] = text
