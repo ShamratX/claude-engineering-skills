@@ -36,15 +36,15 @@ The system covers 11 core capabilities with 14 modular skills.
 
 | Capability | Skill(s) | Implementation |
 |---|---|---|
-| Engineering | `CLAUDE.md` workflow + `debugging`, `testing`, `security` | In-house |
+| Engineering | `CLAUDE.md` workflow + `debugging`, `testing`, `security` | In-house + adapted hard-bug reference |
 | Prompt engineering / optimization | `CLAUDE.md` intent step + `prompt-engineering` | In-house |
 | UI/UX design (web, Android, iPhone) | `ui-ux-design` | In-house + adapted platform references |
-| Frontend development | `web-development` (+ React/Next.js rules) | In-house + adapted references |
+| Frontend development | `web-development` (+ React/Next.js and responsive references) | In-house + copied references |
 | Motion and animation | `motion` (+ official GSAP references) | In-house + copied references |
 | Three.js / 3D web | `threejs-3d` | In-house |
 | Visual / image direction | `visual-direction` | In-house |
 | SEO and website content | `seo-content` | In-house + adapted references |
-| Backend / CMS (any stack) | `web-development` | In-house |
+| Backend / CMS (any stack) | `web-development` (+ Postgres references) | In-house + copied references |
 | Design diversity (anti-generic design) | `frontend-design` | Copied from Anthropic, unmodified |
 | Research (quick / standard / deep, resumable) | `research` | In-house + adapted verification references |
 
@@ -166,7 +166,7 @@ This removes the repo-only `## This repo` section and writes the memory folder's
 
 **4. Restart Claude Code.**
 
-> Using Git Bash on Windows? Follow the macOS/Linux steps and quote paths with spaces, e.g. `cd "/d/Desktop/Important files"`.
+> On Windows, use these PowerShell commands even if you prefer Git Bash: step 3 in Git Bash writes the memory path as `/d/...`, which Windows tools and the validator don't match.
 
 ### macOS / Linux
 
@@ -234,6 +234,8 @@ These apply to every website, web app, dApp, frontend, and backend project unles
 | **Clean projects** | No leftover screenshots, mockups, temporary assets, dead code, or unneeded files or dependencies. Pre-existing files are only removed after asking. |
 | **Accuracy** | No invented APIs, versions, facts, sources, or business details; unverified claims are labeled. |
 | **Safety** | No secrets in code or memory. Irreversible or outward actions require confirmation. |
+| **Original design** | Each UI project gets its own visual direction (recorded in memory); no reused or generic AI layouts across projects. An existing brand or design system wins. |
+| **Icons** | One consistent, maintained icon family per project; no emoji icons; official brand logos only; only the icons used are imported. |
 
 Project conventions and explicit requests always take precedence. The full order is defined under **Priority** in `CLAUDE.md`.
 
@@ -250,6 +252,7 @@ Plain Markdown files, with no database, service, or dependency.
 | `projects/<slug>/tasks.md` | Pending work, known issues, recently completed work |
 | `projects/<slug>/decisions.md` | Decisions with reasons (superseded ones are kept and marked) |
 | `projects/<slug>/research.md` | Research conclusions with source and review-by date |
+| `projects/<slug>/research/<topic>.md` | Resumable notes for deep research |
 | `projects/<slug>/sessions.md` | Short session summaries (newest 10) |
 | `global/` | Cross-project preferences and decisions |
 
@@ -303,7 +306,7 @@ Installed copies don't update themselves. After editing the repo or running `git
 2. Restart Claude Code.
 3. Run `python scripts/validate.py --installed`.
 
-If you delete or rename a skill, also delete its old folder from `~/.claude/skills/`, because copying never removes files.
+If you delete or rename a skill or a reference file, also delete it from `~/.claude/skills/`: copying never removes files, and the validator doesn't detect leftovers.
 
 ### Another computer
 
@@ -319,8 +322,9 @@ Clone the repo and run the full installation. Memory entries don't travel with g
    ---
    ```
 2. Add only domain-specific rules. Global rules belong in `CLAUDE.md`.
-3. Put long material in `references/` and point to it from `SKILL.md`.
-4. Validate, reinstall, restart.
+3. Add the skill to the skill list under **Skills** in `CLAUDE.md` so routing knows its role.
+4. Put long material in `references/` and point to it from `SKILL.md`.
+5. Validate, reinstall, restart.
 
 Third-party skills follow the intake checklist in [`docs/maintenance.md`](docs/maintenance.md) and must be registered in [`docs/third-party.md`](docs/third-party.md).
 
@@ -346,6 +350,8 @@ To ship the skills with one project (for example, for teammates), copy the skill
 | `claude` or `git` is "not recognized" | Install it, then open a **new** terminal. |
 | Skills don't appear | Each must be at `~/.claude/skills/<name>/SKILL.md`; restart Claude Code. |
 | Validator: installed file differs | Re-run installation steps 2–3, then restart. |
+| Validator: `memory/INDEX.md` missing | Expected on a fresh install; the index is created the first time Claude saves project memory. |
+| Installed `CLAUDE.md` has a `/d/...` memory path | Step 3 was run in Git Bash; re-run it in PowerShell. |
 | Validator: placeholder not replaced | Step 3 ran outside the repo folder; `cd` into the repo and re-run it. |
 | Garbled characters (e.g. `â†’`) in the installed `CLAUDE.md` | Step 3 must read the file as UTF-8 (`Get-Content -Encoding utf8`); re-run it exactly as shown. |
 | Path with spaces fails | Quote it: `cd "D:\Desktop\Important files"`. |
