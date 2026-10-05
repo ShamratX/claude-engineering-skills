@@ -13,6 +13,7 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 - **React/Next.js performance:** `references/react/index.md` lists rules by impact; read only the rule files matching the task. Rules that suggest new packages or Vercel-only features don't override project conventions.
 - **Styling:** infer the system from the file being edited; read theme/tokens only when changing them.
 - **CMS:** identify CMS + version; read the theme/plugin/schema file tied to the task, never CMS core.
+- **Postgres** (schema, migrations, indexes, RLS, slow queries, connections, locking): `references/postgres/index.md` lists rules by impact; read only the matching rule files in that folder.
 
 ## Build
 - Match the existing framework, router, state, data fetching, and styling. New dependency → state why existing ones can't do it.
