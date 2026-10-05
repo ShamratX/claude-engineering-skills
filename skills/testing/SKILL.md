@@ -19,6 +19,8 @@ description: Write, fix, or run unit, integration, end-to-end, and smart contrac
 - Deterministic and independent: control time, randomness, network; no order dependence or shared mutable state.
 - Cover: happy path, boundaries (0, 1, max, empty), invalid input/errors, permissions, a regression test per fixed bug.
 - Mock at system boundaries (network, clock, external services), not internal modules.
+- No tautological tests: expected values come from an independent source (a known-good literal, worked example, or the spec), never recomputed the way the code computes them.
+- Test-first work goes in vertical slices: one test, the minimal code to pass it, repeat. Don't write a batch of tests for imagined behavior up front.
 - Unit for logic, integration for boundaries (API + DB), e2e for critical user flows only.
 - **Smart contracts:** fresh state per test (fixtures, `setUp`); assert reverts/custom errors, events, balance changes; access control with non-owner accounts; time manipulation for time-based logic; fuzz/invariant tests for math; fork tests for live-protocol integrations.
 - **Flaky:** find the nondeterminism (timing, order, shared state, real network). Never mask with sleeps or retries.
