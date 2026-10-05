@@ -62,14 +62,7 @@ $end = [array]::IndexOf($lines, '## This repo')
 $lines[0..($end-1)] -replace '\{\{MEMORY_ROOT\}\}', $mem | Set-Content -Encoding utf8 "$HOME\.claude\CLAUDE.md"
 ```
 
-**Step 4 (optional): Install Caveman,** a third-party plugin that shrinks long output to save tokens. It runs its own scripts at session start and on every message; skip it if you don't want third-party code running:
-
-```powershell
-claude plugin marketplace add JuliusBrussee/caveman
-claude plugin install caveman@caveman
-```
-
-**Step 5:** Close Claude Code and open it again. Done.
+**Step 4:** Close Claude Code and open it again. Done.
 
 > Prefer Git Bash? Use the Mac/Linux commands below instead. Put paths that contain spaces in quotes, for example `cd "/d/Desktop/Important files"`.
 
@@ -101,23 +94,15 @@ cp -r skills/* ~/.claude/skills/
 sed -e '/^## This repo/,$d' -e "s|{{MEMORY_ROOT}}|$(pwd)/memory|" CLAUDE.md > ~/.claude/CLAUDE.md
 ```
 
-**Step 4 (optional): Install Caveman** (third-party; see the Windows note above).
-
-```bash
-claude plugin marketplace add JuliusBrussee/caveman
-claude plugin install caveman@caveman
-```
-
-**Step 5:** Close Claude Code and open it again. Done.
+**Step 4:** Close Claude Code and open it again. Done.
 
 ---
 
 ## Check that it worked
 
-1. Run `claude plugin list`. You should see `caveman@caveman` with status **enabled**.
-2. Open Claude Code in any project and ask: *"Which skills do you have?"* It should list the six skills above.
-3. In Claude Code, type `/memory`. The list should include your user memory file (`~/.claude/CLAUDE.md`).
-4. In the repo folder, run `python scripts/validate.py --installed`. It should end with `0 errors`.
+1. Open Claude Code in any project and ask: *"Which skills do you have?"* It should list the skills in `skills/`.
+2. In Claude Code, type `/memory`. The list should include your user memory file (`~/.claude/CLAUDE.md`).
+3. In the repo folder, run `python scripts/validate.py --installed`. It should end with `0 errors`.
 
 ---
 
@@ -127,10 +112,8 @@ The installed copies **don't update themselves**. After you edit this repo, or p
 
 1. Open a terminal in the repo folder (`cd` into it).
 2. Optional: run `git pull` to get the latest version from GitHub.
-3. Run **Steps 2 and 3** again for your system. Skip Step 1 (the repo is already downloaded) and Step 4 (Caveman is already installed).
+3. Run **Steps 2 and 3** again for your system. Skip Step 1 (the repo is already downloaded).
 4. Restart Claude Code.
-
-To update Caveman itself: `claude plugin update caveman@caveman`, then restart.
 
 If you **delete or rename** a skill here, also delete its old folder from `~/.claude/skills/`. Copying adds and overwrites files, but never removes them.
 
@@ -153,7 +136,7 @@ Claude keeps compact notes per project in `memory/`: what the project is, decisi
 1. On the computer where you made changes: commit and push them (`git add .`, `git commit -m "..."`, `git push`).
 2. On the other computer: `git pull` in the repo folder, then Steps 2 and 3 again.
 
-A new computer needs the full install (Steps 1 to 5).
+A new computer needs the full install (Steps 1 to 4).
 
 ---
 
@@ -165,10 +148,9 @@ To give a single project its own copy, for example so teammates get the skills t
 
 ## Uninstall
 
-- **Skills:** delete the six skill folders from `~/.claude/skills/` (on Windows: `C:\Users\<you>\.claude\skills\`).
+- **Skills:** delete this repo's skill folders from `~/.claude/skills/` (on Windows: `C:\Users\<you>\.claude\skills\`).
 - **Rules:** delete `~/.claude/CLAUDE.md` (Step 3 saved your previous one as `CLAUDE.md.bak`).
 - **Memory:** delete the repo's `memory/` contents except `README.md` and `_template/`.
-- **Caveman:** `claude plugin uninstall caveman@caveman`.
 
 Restart Claude Code afterwards.
 
@@ -198,5 +180,5 @@ Full standard and the checklist for third-party skills: `docs/maintenance.md`.
    description: What it does and when to use it. Also say what it's NOT for.
    ---
    ```
-3. Add a `**Caveman**` line (what output to shrink, what to keep in full), then only rules for that domain. Don't repeat rules that are already in `CLAUDE.md`.
+3. Add only rules for that domain, plus a "Not for" boundary. Don't repeat rules that are already in `CLAUDE.md`.
 4. Run `python scripts/validate.py`, install it again (Steps 2 and 3), and restart Claude Code.

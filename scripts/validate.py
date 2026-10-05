@@ -16,6 +16,8 @@ TODAY = dt.date.today()
 STALE_DAYS = 180
 SKILL_WARN_BYTES = 6000
 CLAUDE_WARN_BYTES = 9000
+REF_WARN_BYTES = 30000
+LICENSE_NAMES = ("LICENSE", "LICENSE.txt", "LICENSE.md")
 
 SECRET_PATTERNS = {
     "private key block": r"-----BEGIN [A-Z ]*PRIVATE KEY-----",
@@ -90,8 +92,28 @@ def check_skills():
         size = len(text.encode("utf-8"))
         if size > SKILL_WARN_BYTES:
             warn(f"{rel(f)}: {size} bytes; move detail into a reference file")
+        check_skill_files(d, text)
         skills[name] = text
     return skills
+
+
+def check_skill_files(d, text):
+    """Links resolve, references stay small, copied material keeps its license and is registered."""
+    links = re.findall(r"\]\(([^)#\s]+)\)", text) + re.findall(r"`((?:references|rules)/[\w./-]+\.md)`", text)
+    for target in links:
+        if "://" in target or target.startswith("mailto:"):
+            continue
+        if not (d / target).exists():
+            err(f"{rel(d)}/SKILL.md: broken link '{target}'")
+    for f in d.rglob("*.md"):
+        if f.name != "SKILL.md" and f.stat().st_size > REF_WARN_BYTES:
+            warn(f"{rel(f)}: {f.stat().st_size} bytes; split it")
+    if (d / "SOURCE.md").exists():
+        if not any((d / n).exists() for n in LICENSE_NAMES):
+            err(f"{rel(d)}: has SOURCE.md but no LICENSE file")
+        registry = ROOT / "docs" / "third-party.md"
+        if not registry.exists() or f"`skills/{d.name}" not in registry.read_text(encoding="utf-8"):
+            err(f"{rel(d)}: copied material not listed in docs/third-party.md")
 
 
 def check_claude_md():
@@ -113,7 +135,7 @@ def check_duplicates(claude_text, skills):
     sources = {"CLAUDE.md": claude_text, **{f"skills/{n}": t for n, t in skills.items()}}
     for src, text in sources.items():
         for line in {l.strip() for l in text.splitlines()}:
-            if len(line) >= 60 and not line.startswith(("#", "**Caveman**", "---")):
+            if len(line) >= 60 and not line.startswith(("#", "---")):
                 seen.setdefault(line, []).append(src)
     for line, srcs in seen.items():
         if len(srcs) > 1:
@@ -189,12 +211,17 @@ def check_installed(claude_text, skills):
             err("~/.claude/CLAUDE.md: placeholder not replaced")
         if got != expected.replace("\r\n", "\n"):
             warn("~/.claude/CLAUDE.md: differs from repo; re-run install step 3")
-    for name, text in skills.items():
-        f = home / "skills" / name / "SKILL.md"
-        if not f.exists():
+    for name in skills:
+        src, dst = ROOT / "skills" / name, home / "skills" / name
+        if not dst.exists():
             warn(f"~/.claude/skills/{name}: not installed")
-        elif f.read_text(encoding="utf-8").replace("\r\n", "\n") != text.replace("\r\n", "\n"):
-            warn(f"~/.claude/skills/{name}: differs from repo; re-run install step 2")
+            continue
+        for f in src.rglob("*"):
+            if not f.is_file():
+                continue
+            g = dst / f.relative_to(src)
+            if not g.exists() or g.read_bytes().replace(b"\r\n", b"\n") != f.read_bytes().replace(b"\r\n", b"\n"):
+                warn(f"~/.claude/skills/{name}/{f.relative_to(src).as_posix()}: missing or differs; re-run install step 2")
 
 
 def main():

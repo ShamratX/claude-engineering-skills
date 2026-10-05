@@ -30,8 +30,6 @@ description: <what + when; not for X (use other-skill)>
 
 # <Title>
 
-**Caveman** (per CLAUDE.md): shrink <noisy output>. Keep full: <what must stay exact>.
-
 ## Context    — what to read for this domain, in order
 ## Build      — domain rules (only what CLAUDE.md doesn't already say)
 ## Verify     — the domain's narrowest real check
@@ -53,8 +51,8 @@ Do all steps before copying any third-party skill into `skills/`.
    - writes outside the project or to `~/.claude/`
 4. **Fit:** overlap with existing skills or `CLAUDE.md`? Conflicting rules? Remove the duplicates; keep only the domain content.
 5. **Size:** description ≤ 2 sentences; body within budget; split long parts into `references/`.
-6. **Adapt:** add the `**Caveman**` line and the "Not for" boundary; remove global rules it repeats.
-7. **Record** in `memory/projects/claude-engineering-skills/decisions.md`: name, source URL, commit SHA, license, verdict, and changes made.
+6. **Adapt:** add the "Not for" boundary; remove global rules it repeats.
+7. **Record** in `docs/third-party.md` and the skill's `SOURCE.md`: source URL, author, license, commit SHA, audit date, changes, reason. Keep the original LICENSE/NOTICE next to the copied files.
 8. Run `python scripts/validate.py`, install, restart, and test with one matching and one non-matching task.
 
 ## Release checklist

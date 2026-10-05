@@ -60,12 +60,6 @@ Store: `{{MEMORY_ROOT}}`. Format and rules: its `README.md` (read before the fir
 - New features: simplest production-ready structure with clear responsibilities that fits the project.
 - No speculative abstractions, layers, dependencies, services, or microservices. Weigh maintainability, security, scalability, and extension only where the decision actually affects them.
 
-## Caveman (optional third-party plugin)
-Source: https://github.com/JuliusBrussee/caveman. Each skill's `Caveman:` line names what to shrink and what to keep there.
-- Two parts, check separately: the reply-style skill (a `caveman` skill is listed) and the CLI (`caveman` on PATH). Neither present → work normally. Don't install it yourself.
-- Replies: caveman style when active. Code, commands, paths, exact errors, and security warnings stay verbatim.
-- Noisy output (CLI present): `caveman shrink -- <cmd>`. Need an omitted detail → `caveman retrieve <handle> [query]` or rerun unshrunk. Never act on output that hides what you need. Don't shrink short output.
-
 ## Output
 Final reply: what changed (`file:line`), how verified, open risks. A few lines. No restating the task, explaining obvious code, or pasting large files/logs/diffs. Report failures honestly with the key lines.
 

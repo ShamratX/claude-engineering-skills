@@ -5,8 +5,6 @@ description: Smart contracts and dApps on EVM chains - Solidity, Hardhat, Foundr
 
 # Web3 Development
 
-**Caveman** (per CLAUDE.md): shrink installs, compile output, gas reports, full-suite runs. Keep full: revert reasons, failing test traces, storage layouts, ABIs, addresses, tx hashes, chain IDs.
-
 ## Context
 - **Toolchain + versions first:** `hardhat.config.*` / `foundry.toml`, compiler version, installed OpenZeppelin, ethers/viem, Hardhat versions (lockfile or `lib/` remappings). Majors break APIs:
   - OpenZeppelin 4 → 5: import paths moved; `Ownable` takes an initial owner.
