@@ -278,6 +278,9 @@ Format and rules: [`memory/README.md`](memory/README.md).
 | vercel-labs/agent-skills | `web-development/references/react` | MIT |
 | coreyhaines31/marketingskills | `seo-content/references` | MIT |
 | daymade/claude-code-skills | `research/references` | MIT |
+| mattpocock/skills | `debugging/references/hard-bugs.md` | MIT |
+| supabase/agent-skills | `web-development/references/postgres` | MIT |
+| wshobson/agents | `web-development/references/responsive` | MIT |
 
 ---
 
