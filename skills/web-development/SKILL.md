@@ -17,12 +17,13 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 ## Build
 - Match the existing framework, router, state, data fetching, and styling. New dependency → state why existing ones can't do it.
 - Keep existing layering (route → service → data).
-- **Frontend:** loading/error/empty states; semantic HTML, labels, `alt`, visible focus; responsive; API URLs from env config.
+- **Frontend:** loading/error/empty states; semantic HTML, labels, `alt`, visible focus; API URLs from env config.
+- **Responsive by default** (no need to be asked): every page and component works on mobile, tablet, laptop, and desktop. Mobile-first CSS with the project's breakpoints; fluid layout, type, and media (`max-width: 100%`, `srcset`); no horizontal scroll; touch targets ≥ 44×44 px; no hover-only actions; tables, nav, and modals adapt on small screens.
 - **Backend:** validate input at the boundary with the project's validator; consistent response shape and correct status codes; no stack traces to clients; parameterized queries/ORM; server-side authorization; paginate lists; timeouts on outbound calls.
 - **Performance:** fix measured or obvious issues (N+1, requests in loops, oversized bundles/images). No speculative memoization or caching.
 
 ## Verify
-Project scripts only. UI change → load the page in the dev server and check the console, or say it wasn't checked. API change → one real request.
+Project scripts only. UI change → load the page in the dev server, check the console, and check widths 360, 768, 1024, and 1440 px (browser responsive mode or screenshots); otherwise say it wasn't checked. API change → one real request.
 
 ## Pitfalls
 - `NEXT_PUBLIC_*` / `VITE_*` vars ship to the client: no secrets.

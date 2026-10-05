@@ -29,7 +29,7 @@ description: Smart contracts and dApps on EVM chains - Solidity, Hardhat, Foundr
 - Deploy by script, record addresses per network, verify source on the explorer.
 
 ## dApp
-Match the existing library (ethers, viem, wagmi). Check chain ID and prompt a switch; handle wallet rejection; show pending/confirmed/failed with tx hash; wait for the receipt, then refetch state.
+Match the existing library (ethers, viem, wagmi). Check chain ID and prompt a switch; handle wallet rejection; show pending/confirmed/failed with tx hash; wait for the receipt, then refetch state. dApp UI follows `web-development` rules, including responsive by default (wallet modals and tx states usable on mobile).
 
 ## Verify
 Clean compile → targeted tests (`npx hardhat test <file>`, `forge test --match-test <name>`) → full suite → coverage and Slither when available. Live-protocol integrations → fork tests.
