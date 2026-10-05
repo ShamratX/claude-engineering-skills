@@ -9,12 +9,21 @@ Install once per computer. After that, it works in **every project** on that com
 | File | What it does |
 |---|---|
 | `CLAUDE.md` | Global rules Claude follows in every project: priority, workflow, skill selection, how to read files, memory, research, safety |
-| `skills/web-development` | Websites, frontends, backends, APIs, CMS |
+| `skills/web-development` | Websites, frontends, backends, APIs, CMS (+ React/Next.js performance rules from Vercel) |
 | `skills/web3-development` | Smart contracts, Solidity, dApps, Hardhat/Foundry, OpenZeppelin, Chainlink |
 | `skills/automation-bots` | Scrapers, bots, browser automation, scheduled jobs, email/SMS/messaging |
 | `skills/debugging` | Finding and fixing the cause of errors |
 | `skills/testing` | Writing and running tests |
 | `skills/security` | Security reviews, vulnerability fixes, secrets, login/permissions |
+| `skills/ui-ux-design` | UX decisions for web, Android, iPhone (flows, states, forms, accessibility, platform rules) |
+| `skills/frontend-design` | Distinctive, non-generic visual design (Anthropic, Apache-2.0) |
+| `skills/visual-direction` | Which sections need images, what kind, art direction, image delivery |
+| `skills/motion` | CSS/JS animation, scroll effects, reduced motion; official GSAP references |
+| `skills/threejs-3d` | Three.js, React Three Fiber, WebGL, 3D assets and performance |
+| `skills/seo-content` | SEO structure, metadata, schema, local/international SEO, factual copy |
+| `skills/prompt-engineering` | Writing and improving prompts without changing intent |
+| `skills/research` | Source-checked research saved to memory |
+| `docs/third-party.md` | Source, license, pinned commit, and changes for every copied file |
 | `memory/` | Local memory store: format rules (`README.md`) and templates. Your entries stay on your computer (gitignored) |
 | `scripts/validate.py` | Checks skills, `CLAUDE.md`, and memory for format errors, duplicates, stale entries, and leaked secrets. Python only, no network |
 | `docs/maintenance.md` | Architecture, skill-writing standard, checklist for vetting third-party skills |
