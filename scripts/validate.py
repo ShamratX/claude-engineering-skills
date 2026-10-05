@@ -109,7 +109,7 @@ def check_skill_files(d, text):
         if f.name != "SKILL.md" and f.stat().st_size > REF_WARN_BYTES:
             warn(f"{rel(f)}: {f.stat().st_size} bytes; split it")
     if (d / "SOURCE.md").exists():
-        if not any((d / n).exists() for n in LICENSE_NAMES):
+        if not any(f.name in LICENSE_NAMES for f in d.rglob("LICENSE*")):
             err(f"{rel(d)}: has SOURCE.md but no LICENSE file")
         registry = ROOT / "docs" / "third-party.md"
         if not registry.exists() or f"`skills/{d.name}" not in registry.read_text(encoding="utf-8"):

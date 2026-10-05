@@ -10,6 +10,7 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 - **Target:** the named page/component/route/handler → direct imports → types/schemas → covering test.
 - **Conventions:** copy the pattern of one existing sibling; don't survey many.
 - **Versions:** check the lockfile/manifest when behavior differs by major (React 18/19, Next pages/app router, Express 4/5, Tailwind 3/4).
+- **React/Next.js performance:** `references/react/index.md` lists rules by impact; read only the rule files matching the task. Rules that suggest new packages or Vercel-only features don't override project conventions.
 - **Styling:** infer the system from the file being edited; read theme/tokens only when changing them.
 - **CMS:** identify CMS + version; read the theme/plugin/schema file tied to the task, never CMS core.
 
