@@ -19,7 +19,7 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 - Match the existing framework, router, state, data fetching, and styling. New dependency → state why existing ones can't do it.
 - Keep existing layering (route → service → data).
 - **Frontend:** loading/error/empty states; semantic HTML, labels, `alt`, visible focus; API URLs from env config.
-- **Responsive by default** (no need to be asked): every page and component works on mobile, tablet, laptop, and desktop. Mobile-first CSS with the project's breakpoints; fluid layout, type, and media (`max-width: 100%`, `srcset`); no horizontal scroll; touch targets ≥ 44×44 px; no hover-only actions; tables, nav, and modals adapt on small screens.
+- **Responsive by default** (no need to be asked): every page and component works on mobile, tablet, laptop, and desktop. Mobile-first CSS with the project's breakpoints; fluid layout, type, and media (`max-width: 100%`, `srcset`); no horizontal scroll; touch targets ≥ 44×44 px; no hover-only actions; tables, nav, and modals adapt on small screens. Techniques (fluid type/spacing, container queries, breakpoints, responsive tables): `references/responsive/fluid-layouts.md`, `container-queries.md`, `breakpoint-strategies.md`.
 - **Backend:** validate input at the boundary with the project's validator; consistent response shape and correct status codes; no stack traces to clients; parameterized queries/ORM; server-side authorization; paginate lists; timeouts on outbound calls.
 - **Performance:** fix measured or obvious issues (N+1, requests in loops, oversized bundles/images). No speculative memoization or caching.
 

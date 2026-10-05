@@ -17,3 +17,11 @@
   - Possible upstream inaccuracies (auditor's knowledge, not re-verified): `conn-prepared-statements.md` attributes `{ prepare: false }` to Node.js `pg`, but that is a `postgres.js` option; `schema-primary-keys.md` says UUIDv7 needs the `pg_uuidv7` extension, but PostgreSQL 18 ships `uuidv7()`. Check the installed driver and Postgres version.
   - Reason: official Postgres schema, indexing, RLS, locking, and query rules (Backend capability), loaded one rule at a time.
   - Review by: 2027-01-05.
+- `references/responsive/{fluid-layouts,container-queries,breakpoint-strategies}.md`: copied unchanged from https://github.com/wshobson/agents (`plugins/ui-design/skills/responsive-design/references/`).
+  - Author: Seth Hobson. License: MIT (`references/responsive/LICENSE`).
+  - Commit: 46891e7e60da0e52baf1050b7b6391b64e84c6d9
+  - Audited: 2026-10-05. All three files read in full. Markdown only; CSS/JS examples; links to MDN, web.dev, W3C, and well-known CSS references.
+  - Not copied: that skill's `SKILL.md` and `details.md`, and the rest of the repository (plugins, agents, scripts).
+  - Caveats: `.full-bleed { width: 100vw }` can cause horizontal scroll where scrollbars take width (prefer a grid full-bleed); the icon-only nav pattern needs accessible labels; the Tailwind container-query plugin applies to Tailwind v3 (check the installed version); one TypeScript hook snippet → write it in JavaScript per CLAUDE.md; `prefers-reduced-data` has limited browser support.
+  - Reason: concrete techniques for the responsive-by-default rule.
+  - Review by: 2027-01-05.
