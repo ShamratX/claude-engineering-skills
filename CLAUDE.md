@@ -74,6 +74,11 @@ For website, web app, dApp, frontend, and backend code; an explicit user request
   - Before calling a feature or project complete, check for unused files/assets, dead code, duplicates, unneeded dependencies, and temporary artifacts.
   - Delete only what is verified unused (references and role checked). Unclear purpose → keep and report. Pre-existing files you didn't create → list and ask before deleting.
 
+## Design defaults
+For website, web app, and dApp UI. An existing brand or design system wins for that project.
+- **Original design per project:** before building, set a project-specific visual direction from the brand, industry, audience, goals, and content; record it in project memory and check other projects' memory so directions aren't repeated. Never reuse a previous project's layout, hero, card patterns, type pairing, spacing system, or component arrangement by default. No automatic navbar + centered hero + gradient + rounded card grid + glassmorphism + standard CTA; use a pattern only when it fits this project. Vary composition, hierarchy, type, color, imagery, interaction, and components between projects with intent, not randomly. Within a project stay consistent; usability, accessibility, responsiveness, and performance always hold.
+- **Icons are a design decision:** one consistent, reputable, maintained icon family per project (reuse the existing one when it fits), chosen for meaning, platform, brand, and style. No emojis as UI icons unless requested or genuinely fitting. No invented or approximated brand logos; official, properly licensed assets only. Details: `visual-direction`.
+
 ## Output
 Final reply: what changed (`file:line`), how verified, open risks. A few lines. No restating the task, explaining obvious code, or pasting large files/logs/diffs. Report failures honestly with the key lines.
 

@@ -16,7 +16,7 @@ For whoever maintains this repo (you or Claude). Claude doesn't load this file d
 Rule of placement: a rule that applies to every task goes in `CLAUDE.md`. A rule for one domain goes in that skill. Long detail for one step goes in a reference file. Never write the same rule in two places.
 
 ## Token budget
-- `CLAUDE.md`: keep under ~9 KB. `scripts/validate.py` warns above that.
+- `CLAUDE.md`: keep under ~10.5 KB. `scripts/validate.py` warns above that.
 - `SKILL.md`: keep under ~6 KB; move long material to `references/`.
 - `description`: one or two sentences: what, when, and what it's NOT for. It's paid every session.
 - Every plugin you enable adds its skill descriptions and any hook output to every session. Disable plugins you don't use (see `claude plugin --help`).
