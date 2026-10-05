@@ -13,6 +13,8 @@ description: Find and fix the root cause of errors, crashes, failing builds, wro
 5. **Regressions:** `git log -S "<string>"` or `git bisect`.
 
 ## Process
+Hard bug (no quick repro after one or two attempts, intermittent, performance regression, or several failed fixes) → follow `references/hard-bugs.md` instead of the short loop below.
+
 1. Reproduce, or say it couldn't be reproduced and what that means for confidence.
 2. One hypothesis, one sentence. Test it with the cheapest experiment (targeted log, single test, REPL); change one thing at a time.
 3. Root cause = why the bad state arose, not where it crashed.
