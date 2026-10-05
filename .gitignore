@@ -1,0 +1,6 @@
+# Memory content is private; the repo is public. Track only the format and templates.
+memory/*
+!memory/README.md
+!memory/_template/
+
+__pycache__/

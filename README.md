@@ -1,6 +1,6 @@
 # Claude Engineering Skills
 
-Rules and skills that make [Claude Code](https://claude.com/claude-code) work more efficiently. With them installed, Claude reads only the files a task needs, uses only the skill that matches the task, and keeps its replies short.
+Rules, skills, and a local memory store that make [Claude Code](https://claude.com/claude-code) work more efficiently. With them installed, Claude reads only the files a task needs, uses only the skill that matches the task, remembers project decisions and pending work between sessions, and keeps its replies short.
 
 Install once per computer. After that, it works in **every project** on that computer automatically. You don't need to copy anything into your projects.
 
@@ -8,13 +8,16 @@ Install once per computer. After that, it works in **every project** on that com
 
 | File | What it does |
 |---|---|
-| `CLAUDE.md` | Global rules Claude follows in every project: workflow, planning, architecture, how to read files, accuracy, safety |
+| `CLAUDE.md` | Global rules Claude follows in every project: priority, workflow, skill selection, how to read files, memory, research, safety |
 | `skills/web-development` | Websites, frontends, backends, APIs, CMS |
 | `skills/web3-development` | Smart contracts, Solidity, dApps, Hardhat/Foundry, OpenZeppelin, Chainlink |
 | `skills/automation-bots` | Scrapers, bots, browser automation, scheduled jobs, email/SMS/messaging |
 | `skills/debugging` | Finding and fixing the cause of errors |
 | `skills/testing` | Writing and running tests |
 | `skills/security` | Security reviews, vulnerability fixes, secrets, login/permissions |
+| `memory/` | Local memory store: format rules (`README.md`) and templates. Your entries stay on your computer (gitignored) |
+| `scripts/validate.py` | Checks skills, `CLAUDE.md`, and memory for format errors, duplicates, stale entries, and leaked secrets. Python only, no network |
+| `docs/maintenance.md` | Architecture, skill-writing standard, checklist for vetting third-party skills |
 
 A skill loads only when your task matches it, so unused skills cost nothing.
 
@@ -26,7 +29,7 @@ You need:
 1. **Claude Code**, installed and signed in. Check by running `claude --version` in a terminal.
 2. **Git**. Check with `git --version`. If it's missing, download it from https://git-scm.com.
 
-> **Already have your own `~/.claude/CLAUDE.md`?** Step 3 below replaces that file. Save a copy of it first, then add your own rules back into this repo's `CLAUDE.md` (anywhere above the line `## This repo`).
+> **Already have your own `~/.claude/CLAUDE.md`?** Step 3 below replaces that file and saves the old one as `CLAUDE.md.bak`; add your own rules back into this repo's `CLAUDE.md` (anywhere above the line `## This repo`).
 
 ---
 
@@ -49,15 +52,17 @@ New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force skills\* "$HOME\.claude\skills\"
 ```
 
-**Step 3: Install the global rules.**
+**Step 3: Install the global rules and connect the memory store.** Run this inside the repo folder. It writes the memory folder's location into the installed rules.
 
 ```powershell
-$lines = Get-Content CLAUDE.md
+if (Test-Path "$HOME\.claude\CLAUDE.md") { Copy-Item "$HOME\.claude\CLAUDE.md" "$HOME\.claude\CLAUDE.md.bak" }
+$mem = (Resolve-Path memory).Path -replace '\\','/'
+$lines = Get-Content -Encoding utf8 CLAUDE.md
 $end = [array]::IndexOf($lines, '## This repo')
-$lines[0..($end-1)] | Set-Content -Encoding utf8 "$HOME\.claude\CLAUDE.md"
+$lines[0..($end-1)] -replace '\{\{MEMORY_ROOT\}\}', $mem | Set-Content -Encoding utf8 "$HOME\.claude\CLAUDE.md"
 ```
 
-**Step 4: Install Caveman,** the tool that shrinks long output to save tokens:
+**Step 4 (optional): Install Caveman,** a third-party plugin that shrinks long output to save tokens. It runs its own scripts at session start and on every message; skip it if you don't want third-party code running:
 
 ```powershell
 claude plugin marketplace add JuliusBrussee/caveman
@@ -92,10 +97,11 @@ cp -r skills/* ~/.claude/skills/
 **Step 3: Install the global rules.**
 
 ```bash
-sed '/^## This repo/,$d' CLAUDE.md > ~/.claude/CLAUDE.md
+[ -f ~/.claude/CLAUDE.md ] && cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.bak
+sed -e '/^## This repo/,$d' -e "s|{{MEMORY_ROOT}}|$(pwd)/memory|" CLAUDE.md > ~/.claude/CLAUDE.md
 ```
 
-**Step 4: Install Caveman.**
+**Step 4 (optional): Install Caveman** (third-party; see the Windows note above).
 
 ```bash
 claude plugin marketplace add JuliusBrussee/caveman
@@ -111,6 +117,7 @@ claude plugin install caveman@caveman
 1. Run `claude plugin list`. You should see `caveman@caveman` with status **enabled**.
 2. Open Claude Code in any project and ask: *"Which skills do you have?"* It should list the six skills above.
 3. In Claude Code, type `/memory`. The list should include your user memory file (`~/.claude/CLAUDE.md`).
+4. In the repo folder, run `python scripts/validate.py --installed`. It should end with `0 errors`.
 
 ---
 
@@ -126,6 +133,18 @@ The installed copies **don't update themselves**. After you edit this repo, or p
 To update Caveman itself: `claude plugin update caveman@caveman`, then restart.
 
 If you **delete or rename** a skill here, also delete its old folder from `~/.claude/skills/`. Copying adds and overwrites files, but never removes them.
+
+---
+
+## Memory
+
+Claude keeps compact notes per project in `memory/`: what the project is, decisions and why, pending tasks, known issues, and short session summaries. It never stores full conversations or secrets.
+
+- Each new session, Claude reads only `memory/INDEX.md` and the two core files of the project you're working in. Other notes are searched, not loaded.
+- Claude adds a project the first time it does real work there. You can also edit any file by hand; it's plain Markdown.
+- Rules and file format: `memory/README.md`.
+- Writing to `memory/` from another project folder may ask for permission. Approve it, or allow that folder in your Claude Code permission settings.
+- This repo is public, so your memory entries are **gitignored** and stay on this computer. Back up the `memory/` folder yourself, or make the repo private and remove the `memory/*` lines from `.gitignore` to sync it through git.
 
 ---
 
@@ -147,7 +166,8 @@ To give a single project its own copy, for example so teammates get the skills t
 ## Uninstall
 
 - **Skills:** delete the six skill folders from `~/.claude/skills/` (on Windows: `C:\Users\<you>\.claude\skills\`).
-- **Rules:** delete `~/.claude/CLAUDE.md`.
+- **Rules:** delete `~/.claude/CLAUDE.md` (Step 3 saved your previous one as `CLAUDE.md.bak`).
+- **Memory:** delete the repo's `memory/` contents except `README.md` and `_template/`.
 - **Caveman:** `claude plugin uninstall caveman@caveman`.
 
 Restart Claude Code afterwards.
@@ -168,6 +188,8 @@ Restart Claude Code afterwards.
 
 ## Adding your own skill
 
+Full standard and the checklist for third-party skills: `docs/maintenance.md`.
+
 1. Create `skills/<name>/SKILL.md`. Use a lowercase name with hyphens, like `data-analysis`.
 2. Start it with:
    ```markdown
@@ -177,4 +199,4 @@ Restart Claude Code afterwards.
    ---
    ```
 3. Add a `**Caveman**` line (what output to shrink, what to keep in full), then only rules for that domain. Don't repeat rules that are already in `CLAUDE.md`.
-4. Install it again (Steps 2 and 3) and restart Claude Code.
+4. Run `python scripts/validate.py`, install it again (Steps 2 and 3), and restart Claude Code.

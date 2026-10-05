@@ -5,7 +5,7 @@ description: Find and fix the root cause of errors, crashes, failing builds, wro
 
 # Debugging
 
-**Caveman** (check/install per CLAUDE.md): shrink repro runs, verbose logs, install/build noise. Keep full: the **first** error, project-code stack frames, failing assertion, exact versions. Clue hidden → `caveman retrieve` or rerun unshrunk.
+**Caveman** (per CLAUDE.md): shrink repro runs, verbose logs, install/build noise. Keep full: the **first** error, project-code stack frames, failing assertion, exact versions. Clue hidden → `caveman retrieve` or rerun unshrunk.
 
 ## Context: follow the evidence
 1. **Evidence:** exact error, stack trace, repro steps, recent changes (`git log --oneline -10`, `git diff`).

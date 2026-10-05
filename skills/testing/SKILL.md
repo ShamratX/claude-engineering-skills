@@ -5,7 +5,7 @@ description: Write, fix, or run unit, integration, end-to-end, and smart contrac
 
 # Testing
 
-**Caveman** (check/install per CLAUDE.md): `caveman shrink -- <test cmd>` for suite runs and passing noise. Keep full: each failing test name, assertion diff, stack trace, pass/fail/skip counts.
+**Caveman** (per CLAUDE.md): `caveman shrink -- <test cmd>` for suite runs and passing noise. Keep full: each failing test name, assertion diff, stack trace, pass/fail/skip counts.
 
 ## Context
 - Framework from manifest scripts + test config. **One** nearby existing test as the style template.

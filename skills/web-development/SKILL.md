@@ -5,7 +5,7 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 
 # Web Development
 
-**Caveman** (check/install per CLAUDE.md): shrink installs, builds, dev-server logs, full lint runs. Keep full: first compile/type error, failing request/response, hydration and console errors.
+**Caveman** (per CLAUDE.md): shrink installs, builds, dev-server logs, full lint runs. Keep full: first compile/type error, failing request/response, hydration and console errors.
 
 ## Context
 - **Stack once:** manifest deps + scripts. Framework config (`next.config.*`, `vite.config.*`, ...) only if the task touches build, routing, or env.

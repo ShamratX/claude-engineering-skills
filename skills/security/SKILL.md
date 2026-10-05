@@ -5,7 +5,7 @@ description: Security-focused work - audits and security reviews, vulnerability 
 
 # Security
 
-**Caveman** (check/install per CLAUDE.md): shrink bulk scanner output (`npm audit`, `pip-audit`, Slither), then read every High/Critical finding in full. Keep full: vulnerable lines, attack paths, security warnings (complete sentences).
+**Caveman** (per CLAUDE.md): shrink bulk scanner output (`npm audit`, `pip-audit`, Slither), then read every High/Critical finding in full. Keep full: vulnerable lines, attack paths, security warnings (complete sentences).
 
 ## Context: the exception to skim-reading
 - **Scope:** the diff (`git diff main...`), the named feature, or entry points (routes, handlers, public/external functions, bot commands, webhooks).

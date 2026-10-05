@@ -5,7 +5,7 @@ description: Scrapers, crawlers, Telegram/Discord/Slack/WhatsApp bots, browser a
 
 # Automation & Bots
 
-**Caveman** (check/install per CLAUDE.md): shrink run logs, crawl output, HTML/JSON dumps; `caveman browse <url>` for a compressed page view. Keep full: failing request/response, broken selector, provider error codes, stack trace.
+**Caveman** (per CLAUDE.md): shrink run logs, crawl output, HTML/JSON dumps; `caveman browse <url>` for a compressed page view. Keep full: failing request/response, broken selector, provider error codes, stack trace.
 
 ## Context
 - Entry point → config/env loading → the named handler/step. Scheduler config only if timing is involved.
