@@ -48,6 +48,7 @@ The system covers 13 core capabilities with 16 modular skills.
 | Website copywriting | `content-copywriting` | In-house + adapted AI-writing reference |
 | Backend / CMS (any stack) | `web-development` (+ Postgres references) | In-house + copied references |
 | Design diversity (anti-generic design) | `frontend-design` | Copied from Anthropic, unmodified |
+| UI/UX reference data (palettes, font pairs, UX and stack rules) | `ui-ux-pro-max` | In-house SKILL.md + copied data (no scripts) |
 | Research (quick / standard / deep, resumable) | `research` | In-house + adapted verification references |
 
 Additional domain skills: `web3-development` (Solidity, dApps, Hardhat/Foundry) and `automation-bots` (scrapers, bots, scheduled jobs, messaging).
@@ -118,7 +119,7 @@ claude-engineering-skills/
     ├── automation-bots/   content-copywriting/ debugging/      frontend-design/
     ├── local-seo/         motion/           prompt-engineering/ research/
     ├── security/          seo-content/      testing/           threejs-3d/
-    ├── ui-ux-design/      visual-direction/ web-development/
+    ├── ui-ux-design/      ui-ux-pro-max/    visual-direction/  web-development/
     └── web3-development/
 ```
 
@@ -290,6 +291,7 @@ Format and rules: [`memory/README.md`](memory/README.md).
 | mattpocock/skills | `debugging/references/hard-bugs.md` | MIT |
 | supabase/agent-skills | `web-development/references/postgres` | MIT |
 | wshobson/agents | `web-development/references/responsive` | MIT |
+| nextlevelbuilder/ui-ux-pro-max-skill | `ui-ux-pro-max/references` | MIT |
 
 ---
 

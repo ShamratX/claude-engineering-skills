@@ -27,7 +27,7 @@ Scale to the task. A one-line fix skips most steps.
 
 ## Skills
 - Select by skill `description`. Load only the skill(s) the task touches. No match → none. Never "just in case".
-- Build skills: `web-development` (frontend, backend, CMS), `web3-development`, `automation-bots`, `threejs-3d`, `motion`. Design skills: `ui-ux-design` (how it works), `frontend-design` (how it looks, anti-generic), `visual-direction` (imagery). Content: `content-copywriting` (page copy), `seo-content` (SEO), `local-seo` (local businesses), `prompt-engineering`. Cross-cutting: `research`, `debugging`, `testing`, `security`.
+- Build skills: `web-development` (frontend, backend, CMS), `web3-development`, `automation-bots`, `threejs-3d`, `motion`. Design skills: `ui-ux-design` (how it works), `frontend-design` (how it looks, anti-generic), `visual-direction` (imagery), `ui-ux-pro-max` (lookup data: palettes, font pairs, UX rules, stack rules). Content: `content-copywriting` (page copy), `seo-content` (SEO), `local-seo` (local businesses), `prompt-engineering`. Cross-cutting: `research`, `debugging`, `testing`, `security`.
 - Add a skill only when that activity is part of the task. Typical sets:
   - Website/landing page: `ui-ux-design` → `frontend-design` → `visual-direction` → `content-copywriting` → `web-development` (+ `motion`, `threejs-3d`, `seo-content`, `local-seo` when in scope) → `testing`.
   - dApp: `web3-development` + `security` + `testing` (+ `ui-ux-design`/`frontend-design`/`web-development` for UI work).
