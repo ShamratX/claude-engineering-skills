@@ -1,9 +1,9 @@
-<!-- Modified from coreyhaines31/marketingskills@dda3841 (MIT, see ../LICENSE): removed product-marketing-context step and Related Skills list (skills not in this repo). -->
+<!-- Modified from coreyhaines31/marketingskills@1efedbc (MIT, see LICENSE in this skill folder): removed the product-marketing-context step and Related Skills list (skills not in this repo). -->
 ---
 name: schema
 description: When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user mentions "schema markup," "structured data," "JSON-LD," "rich snippets," "schema.org," "FAQ schema," "product schema," "review schema," "breadcrumb schema," "Google rich results," "knowledge panel," "star ratings in search," or "add structured data." Use this whenever someone wants their pages to show enhanced results in Google. For broader SEO issues, see seo-audit. For AI search optimization, see ai-seo.
 metadata:
-  version: 2.0.0
+  version: 2.0.2
 ---
 
 # Schema Markup
@@ -51,7 +51,7 @@ Before implementing schema, understand:
 | Type | Use For | Required Properties |
 |------|---------|-------------------|
 | Organization | Company homepage/about | name, url |
-| WebSite | Homepage (search box) | name, url |
+| WebSite | Homepage/site identity | name, url |
 | Article | Blog posts, news | headline, image, datePublished, author |
 | Product | Product pages | name, image, offers |
 | SoftwareApplication | SaaS/app pages | name, offers |
@@ -62,6 +62,16 @@ Before implementing schema, understand:
 | Event | Events, webinars | name, startDate, location |
 
 **For complete JSON-LD examples**: See [references/schema-examples.md](schema-examples.md)
+
+### Check Google Feature Support First
+
+Schema.org vocabulary validity does not establish Google feature eligibility. Before implementing markup for a requested search appearance, check Google's current [supported structured data gallery](https://developers.google.com/search/docs/appearance/structured-data/search-gallery).
+
+- **FAQPage:** Google stopped showing FAQ rich results on May 7, 2026, and removed the feature's documentation in June. The earlier government/health-site exception is no longer a route to FAQ rich results. See Google's [documentation updates](https://developers.google.com/search/updates).
+- **HowTo:** Google retired HowTo rich results in September 2023. See the [retirement announcement](https://developers.google.com/search/blog/2023/08/howto-faq-changes).
+- **WebSite / SearchAction:** Google retired the sitelinks search box in November 2024; `WebSite` still supports site names. See the [search box announcement](https://developers.google.com/search/blog/2024/10/sitelinks-search-box).
+
+These types can still describe matching visible content in Schema.org. Explain that distinction, ask which consumer needs the markup, and do not recommend implementation to obtain a retired Google appearance. Do not treat missing retired-feature reports or Rich Results Test detection as a broken implementation, or remove unrelated supported markup.
 
 ---
 
@@ -81,6 +91,7 @@ Recommended: sku, brand, aggregateRating, review
 
 ### FAQPage
 Required: mainEntity (array of Question/Answer pairs)
+Optional semantic markup for visible FAQs; not a way to obtain Google FAQ rich results. Check the feature-support guidance above before offering code.
 
 ### BreadcrumbList
 Required: itemListElement (array with position, name, item)
@@ -107,9 +118,9 @@ You can combine multiple schema types on one page using `@graph`:
 ## Validation and Testing
 
 ### Tools
-- **Google Rich Results Test**: https://search.google.com/test/rich-results
+- **Google Rich Results Test**: https://search.google.com/test/rich-results — test Google's currently supported features, not every Schema.org type
 - **Schema.org Validator**: https://validator.schema.org/
-- **Search Console**: Enhancements reports
+- **Search Console**: available enhancement reports for supported features; retired types need not have a report
 
 ### Common Errors
 
@@ -152,8 +163,9 @@ You can combine multiple schema types on one page using `@graph`:
 ```
 
 ### Testing Checklist
-- [ ] Validates in Rich Results Test
-- [ ] No errors or warnings
+- [ ] Requested Google appearance is currently supported, or a separate semantic consumer is identified
+- [ ] Validates in Schema.org Validator; supported Google features also pass Rich Results Test
+- [ ] Required-field errors resolved; recommended-field warnings reviewed
 - [ ] Matches page content
 - [ ] All required properties included
 
@@ -166,4 +178,3 @@ You can combine multiple schema types on one page using `@graph`:
 3. What data is available to populate the schema?
 4. Is there existing schema on the page?
 5. What's your tech stack?
-

@@ -1,9 +1,9 @@
-<!-- Modified from coreyhaines31/marketingskills@dda3841 (MIT, see ../LICENSE): removed product-marketing-context step, AI-search pointers, and Related Skills list (skills not in this repo). AI-writing reference moved to content-copywriting. -->
+<!-- Modified from coreyhaines31/marketingskills@1efedbc (MIT, see LICENSE in this skill folder): removed the product-marketing-context step and Related Skills list (skills not in this repo); links re-pointed to where the files live in this repo. -->
 ---
 name: seo-audit
-description: When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," or "indexing issues." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
+description: When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," "SEO health check," "my traffic dropped," "lost rankings," "not showing up in Google," "site isn't ranking," "Google update hit me," "page speed," "core web vitals," "crawl errors," "indexing issues," "stuck on page 2," "striking distance keywords," "title tag rewrite," "low CTR," "local SEO," "Google Business Profile," or "map pack." Use this even if the user just says something vague like "my SEO is bad" or "help with SEO" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.
 metadata:
-  version: 2.0.1
+  version: 2.2.0
 ---
 
 # SEO Audit
@@ -54,6 +54,8 @@ Reporting "no schema found" based solely on `web_fetch` or `curl` leads to false
 3. **On-Page Optimization** (is content optimized?)
 4. **Content Quality** (does it deserve to rank?)
 5. **Authority & Links** (does it have credibility?)
+
+Once the foundations are sound, the fastest wins are usually pages already ranking in positions 8–20. See [rankings-push.md](rankings-push.md) for that workflow and the checklist for shipping new pages.
 
 ---
 
@@ -233,19 +235,9 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 
 ### Title Tags
 
-**Check for:**
-- Unique titles for each page
-- Primary keyword near beginning
-- 50-60 characters (visible in SERP)
-- Compelling and click-worthy
-- Brand name placement (end, usually)
+**Check for:** unique titles, primary query near the front, about 50–60 characters, a reason to click, alignment with the H1, and a pattern that fits the page type.
 
-**Common issues:**
-- Duplicate titles
-- Too long (truncated)
-- Too short (wasted opportunity)
-- Keyword stuffing
-- Missing entirely
+**Common issues:** duplicates, truncation, keyword stuffing, missing titles, and titles Google rewrites in results. Patterns by page type, the rewrite triggers, and a bulk-audit format are in [title-tags.md](title-tags.md).
 
 ### Meta Descriptions
 
@@ -416,6 +408,8 @@ Three equivalent placement methods: HTML `<link>` in `<head>`, HTTP `Link` heade
 - Missing location pages
 - No local content
 
+For Google Business Profiles, the map pack, citations, reviews, and location pages, see [local-seo.md](../../local-seo/references/local-seo-audit.md).
+
 ---
 
 ## Output Format
@@ -451,8 +445,12 @@ Same format as above
 
 ## References
 
-- AI Writing Detection: moved to the `content-copywriting` skill (`references/ai-writing-detection.md` there)
+- [AI Writing Detection](../../content-copywriting/references/ai-writing-detection.md): Common AI writing patterns to avoid (em dashes, overused phrases, filler words)
 - [International SEO](international-seo.md): Evidence and sources for hreflang, canonical + i18n, sitemaps, URL structure, and content quality across locales
+- [Title Tags](title-tags.md): Title patterns by page type, Google's rewrite triggers, low-CTR fixes, and the bulk-audit table
+- [Local SEO](../../local-seo/references/local-seo-audit.md): Business Profiles, map pack diagnosis, citations, reviews, and location pages for local businesses (with profile and page details in two companion files)
+- [Rankings Push](rankings-push.md): Moving positions 8–20 onto page one, fixing weak click-through, and the checklist for shipping a new page
+- For AI search optimization (AEO, GEO, LLMO, AI Overviews), see [ai-seo/index.md](ai-seo/index.md)
 
 ---
 
@@ -483,4 +481,3 @@ Same format as above
 3. Any recent changes or migrations?
 4. Who are your top organic competitors?
 5. What's your current organic traffic baseline?
-

@@ -1,6 +1,6 @@
 ---
 name: local-seo
-description: Local SEO for businesses that serve a city or service area - local search intent, service-area research, service and location page architecture, local titles/headings/URLs/internal links, NAP consistency, LocalBusiness structured data, and local technical SEO checks. Use when building or auditing a site for a local business (trades, clinics, restaurants, agencies, shops). Not for general or international SEO (seo-content), writing the page copy itself (content-copywriting), or Google Business Profile management beyond guidance.
+description: Local SEO for businesses that serve a city or service area - local search intent, service-area research, service and location page architecture, local titles/headings/URLs/internal links, NAP consistency, LocalBusiness structured data, Google Business Profile, citation, and review guidance, and local technical SEO checks. Use when building or auditing a site for a local business (trades, clinics, restaurants, agencies, shops). Not for general or international SEO (seo-content), or writing the page copy itself (content-copywriting).
 ---
 
 # Local SEO
@@ -11,6 +11,7 @@ General on-page, technical, and schema rules live in `seo-content`; load it alon
 - **Verified business facts:** legal/trading name, address or service-area-only status, phone, hours, services, areas actually served, licenses. Source: the user, the existing site, or the client's Business Profile. Missing → `[CONFIRM: ...]` placeholder; never invent an address, area, or phone.
 - **Search intent:** what people in the area type (service + place, "near me", emergency/urgent variants, problem-led queries). Use the user's data (Search Console, Business Profile insights, call logs, ad reports) or keyword tools they provide; without data, propose terms as hypotheses and say so. Never state search volumes or rankings you didn't measure.
 - **Existing site:** where titles, meta, canonical, sitemap, robots, and JSON-LD are generated (framework/CMS config, layout, SEO plugin). Change them at the source.
+- Audits, Business Profile fields, citations, reviews, and measurement: `references/local-seo-audit.md`, with `references/local-seo-profile-and-citations.md` and `references/local-seo-pages-and-measurement.md`. Never publish a home address that customers don't visit.
 - Platform guidelines and their sources: `references/google-guidelines.md`. Re-check the cited Google pages when a decision depends on rich-result eligibility or spam policy.
 
 ## Site architecture

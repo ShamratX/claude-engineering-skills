@@ -19,7 +19,7 @@ In-house reference. Facts below were checked against Google's own documentation 
 ## Structured data (JSON-LD)
 - Use `LocalBusiness` with the **most specific subtype** (e.g. `Plumber`, `Dentist`, `Restaurant`); several types can be combined in `@type` for multi-service businesses. Google requires `name` and `address`; also add `telephone`, `url`, `openingHoursSpecification`, `geo`, `image`, `priceRange` when true and available. One `LocalBusiness` entity per location page. General JSON-LD examples: the `seo-content` skill.
 - **No self-serving review stars:** a business's own `aggregateRating`/`Review` markup about itself on its own site is not eligible for review stars in Google. Add `aggregateRating` only on sites that collect reviews about *other* businesses.
-- **FAQ rich results** are shown only for well-known, authoritative government and health sites; **HowTo** rich results are no longer shown. FAQ content can still help readers; don't promise a rich result.
+- **FAQ rich results** stopped showing in Google Search on 2026-05-07 for all sites (documentation removed 2026-06-15); **HowTo** rich results were retired in 2023. Visible FAQ content can still help readers, and `FAQPage` stays valid Schema.org; don't promise a rich result.
 - Markup must match visible page content. Validate with Google's Rich Results Test.
 
 ## Reviews (process advice, not code)
@@ -32,6 +32,6 @@ Search Console (queries with the city/service, location pages' impressions), Bus
 ## Sources (accessed 2026-10-05)
 - Google Search Central, Local business structured data: https://developers.google.com/search/docs/appearance/structured-data/local-business (last updated 2026-09-08)
 - Google Search Central, Review snippet guidelines (self-serving reviews): https://developers.google.com/search/docs/appearance/structured-data/review-snippet
-- Google Search Central, FAQ structured data and documentation updates (FAQ limited to government/health; HowTo no longer shown): https://developers.google.com/search/docs/appearance/structured-data/faqpage
+- Google Search Central, FAQ structured data and documentation updates (FAQ rich results retired 2026-05-07, per Google's documentation-updates changelog, checked 2026-10-10; HowTo no longer shown): https://developers.google.com/search/docs/appearance/structured-data/faqpage
 - Google Search Central, Spam policies (doorway abuse): https://developers.google.com/search/docs/essentials/spam-policies (last updated 2026-08-28)
 - Google Business Profile Help, Guidelines for representing your business: https://support.google.com/business/answer/3038177

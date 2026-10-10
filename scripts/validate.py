@@ -28,7 +28,7 @@ SECRET_PATTERNS = {
     "Google API key": r"\bAIza[0-9A-Za-z_-]{35}\b",
     "hex private key": r"\b(0x)?[0-9a-fA-F]{64}\b",
     "JWT": r"\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}",
-    "credential assignment": r"(?i)\b(password|passwd|secret|api[_-]?key|token|mnemonic|seed[_ ]phrase)\b\s*[:=]\s*['\"]?[^\s'\"`<>]{8,}",
+    "credential assignment": r"(?i)(?<![a-z])(password|passwd|secret|api[_-]?key|token|mnemonic|seed[_ ]phrase)(?![a-z])\s*[:=]\s*['\"]?(?=[^\s'\"`<>]*[0-9_+/=-])[^\s'\"`<>]{8,}",  # value needs a digit or _+/=- so prose ("the secret: consistency") isn't flagged
 }
 ENTRY_RE = re.compile(r"^- \d{4}-\d{2}-\d{2} · .+ · (confirmed|unverified|superseded)\b")
 

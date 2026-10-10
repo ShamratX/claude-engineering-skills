@@ -43,9 +43,9 @@ The system covers 13 core capabilities with 16 modular skills.
 | Motion and animation | `motion` (+ official GSAP references) | In-house + copied references |
 | Three.js / 3D web | `threejs-3d` | In-house |
 | Visual / image direction | `visual-direction` | In-house |
-| SEO (on-page, technical, schema, international) | `seo-content` | In-house + adapted references |
-| Local SEO | `local-seo` | In-house (sourced from Google documentation) |
-| Website copywriting | `content-copywriting` | In-house + adapted AI-writing reference |
+| SEO (on-page, technical, schema, international, AI search) | `seo-content` | In-house + adapted references |
+| Local SEO | `local-seo` | In-house (sourced from Google documentation) + adapted Business Profile/citation references |
+| Website copywriting | `content-copywriting` | In-house + adapted copywriting, editing, and AI-writing references |
 | Backend / CMS (any stack) | `web-development` (+ Postgres references) | In-house + copied references |
 | Design diversity (anti-generic design) | `frontend-design` | Copied from Anthropic, unmodified |
 | UI/UX reference data (palettes, font pairs, UX and stack rules) | `ui-ux-pro-max` | In-house SKILL.md + copied data (no scripts) |
@@ -286,7 +286,7 @@ Format and rules: [`memory/README.md`](memory/README.md).
 | pbakaus/impeccable (from ehmo/platform-design-skills) | `ui-ux-design/references` | Apache-2.0 (+ MIT) |
 | greensock/gsap-skills | `motion/references/gsap` | MIT |
 | vercel-labs/agent-skills | `web-development/references/react` | MIT |
-| coreyhaines31/marketingskills | `seo-content/references`, `content-copywriting/references` | MIT |
+| coreyhaines31/marketingskills | `seo-content/references`, `content-copywriting/references`, `local-seo/references` | MIT |
 | daymade/claude-code-skills | `research/references` | MIT |
 | mattpocock/skills | `debugging/references/hard-bugs.md` | MIT |
 | supabase/agent-skills | `web-development/references/postgres` | MIT |

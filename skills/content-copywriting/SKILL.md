@@ -1,6 +1,6 @@
 ---
 name: content-copywriting
-description: Website and marketing copy - headlines, hero and service descriptions, calls to action, FAQs, trust signals, about/contact sections, and rewriting or reviewing existing page text for clarity, accuracy, and conversion. Use when writing or editing the words on a page. Not for search metadata, schema, or technical SEO (seo-content, local-seo), UI microcopy patterns inside app flows (ui-ux-design), or prompts (prompt-engineering).
+description: Website and marketing copy - headlines, hero and service descriptions, calls to action, FAQs, trust signals, about/contact sections, and rewriting, editing, or de-AI-ing existing page text for clarity, accuracy, and conversion. Use when writing or editing the words on a page. Not for search metadata, schema, or technical SEO (seo-content, local-seo), UI microcopy patterns inside app flows (ui-ux-design), or prompts (prompt-engineering).
 ---
 
 # Content Copywriting
@@ -21,6 +21,7 @@ description: Website and marketing copy - headlines, hero and service descriptio
 - **FAQs:** real objections and questions (from the client, reviews, sales calls, search queries), answered directly in the first sentence. No filler questions written to stuff keywords.
 - **Trust signals:** only verifiable ones the client supplied: licenses with numbers, real reviews with permission, named clients, guarantees with their actual terms, years in business, memberships. Show them near the decision they support.
 - **Contact sections:** every way to reach the business, hours, service area, response time if known, and what to include in a message.
+- **Frameworks:** headline formulas, section orders, and message tests ("Now you can", discomfort → vision → path) in `references/copywriting.md` and `references/copy-frameworks.md`; transitions in `references/natural-transitions.md`. These never override Accuracy below: where they suggest numbers, testimonials, or guarantees, use `[CONFIRM: ...]`.
 - **Keywords** (from `seo-content`/`local-seo` when in scope): use them where a reader would naturally expect the words; never at the cost of readability.
 
 ## Accuracy (non-negotiable)
@@ -30,7 +31,7 @@ description: Website and marketing copy - headlines, hero and service descriptio
 - Keep facts identical everywhere they appear (name, phone, hours, prices, service area).
 
 ## Edit pass
-Remove: filler openers and closers, repeated points across sections, empty intensifiers, buzzwords, hedging stacks, awkward keyword phrasing, and anything the reader doesn't need. Check the AI-sounding patterns in `references/ai-writing-detection.md` when reviewing generated or existing copy; fix the pattern, don't swap one stock phrase for another.
+Remove: filler openers and closers, repeated points across sections, empty intensifiers, buzzwords, hedging stacks, awkward keyword phrasing, and anything the reader doesn't need. Check AI-sounding patterns in `references/ai-tells.md` (sentence shapes, with the self-check) and `references/ai-writing-detection.md` (words); fix from the facts, don't swap one stock phrase for another. Full edit of existing copy: the seven sweeps in `references/copy-editing.md` with `references/copy-editing-checklist.md` and `references/plain-english-alternatives.md`. Refreshing a published page: `references/content-refresh.md`.
 
 ## Deliver
 Copy organized by page and section, in the order it appears. Then: voice line, assumptions, and the list of `[CONFIRM: ...]` items for the client.
