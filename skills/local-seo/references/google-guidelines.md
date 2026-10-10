@@ -17,7 +17,7 @@ In-house reference. Facts below were checked against Google's own documentation 
 - **Titles/H1:** service + place + brand where it reads naturally (e.g. "Emergency Plumber in Leeds | Smith & Sons"); never keyword lists.
 
 ## Structured data (JSON-LD)
-- Use `LocalBusiness` with the **most specific subtype** (e.g. `Plumber`, `Dentist`, `Restaurant`); several types can be combined in `@type` for multi-service businesses. Google requires `name` and `address`; also add `telephone`, `url`, `openingHoursSpecification`, `geo`, `image`, `priceRange` when true and available. One `LocalBusiness` entity per location page. Examples: `schema-examples.md`.
+- Use `LocalBusiness` with the **most specific subtype** (e.g. `Plumber`, `Dentist`, `Restaurant`); several types can be combined in `@type` for multi-service businesses. Google requires `name` and `address`; also add `telephone`, `url`, `openingHoursSpecification`, `geo`, `image`, `priceRange` when true and available. One `LocalBusiness` entity per location page. General JSON-LD examples: the `seo-content` skill.
 - **No self-serving review stars:** a business's own `aggregateRating`/`Review` markup about itself on its own site is not eligible for review stars in Google. Add `aggregateRating` only on sites that collect reviews about *other* businesses.
 - **FAQ rich results** are shown only for well-known, authoritative government and health sites; **HowTo** rich results are no longer shown. FAQ content can still help readers; don't promise a rich result.
 - Markup must match visible page content. Validate with Google's Rich Results Test.

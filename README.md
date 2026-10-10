@@ -32,18 +32,20 @@ Install once per computer and it applies to **every project** on that computer.
 
 ## Capabilities
 
-The system covers 11 core capabilities with 14 modular skills.
+The system covers 13 core capabilities with 16 modular skills.
 
 | Capability | Skill(s) | Implementation |
 |---|---|---|
-| Engineering | `CLAUDE.md` workflow + `debugging`, `testing`, `security` | In-house + adapted hard-bug reference |
+| Engineering and QA | `CLAUDE.md` workflow + `debugging`, `testing` (incl. pre-delivery QA checklists), `security` | In-house + adapted hard-bug reference |
 | Prompt engineering / optimization | `CLAUDE.md` intent step + `prompt-engineering` | In-house |
 | UI/UX design (web, Android, iPhone) | `ui-ux-design` | In-house + adapted platform references |
 | Frontend development | `web-development` (+ React/Next.js and responsive references) | In-house + copied references |
 | Motion and animation | `motion` (+ official GSAP references) | In-house + copied references |
 | Three.js / 3D web | `threejs-3d` | In-house |
 | Visual / image direction | `visual-direction` | In-house |
-| SEO and website content | `seo-content` | In-house + adapted references |
+| SEO (on-page, technical, schema, international) | `seo-content` | In-house + adapted references |
+| Local SEO | `local-seo` | In-house (sourced from Google documentation) |
+| Website copywriting | `content-copywriting` | In-house + adapted AI-writing reference |
 | Backend / CMS (any stack) | `web-development` (+ Postgres references) | In-house + copied references |
 | Design diversity (anti-generic design) | `frontend-design` | Copied from Anthropic, unmodified |
 | Research (quick / standard / deep, resumable) | `research` | In-house + adapted verification references |
@@ -84,7 +86,9 @@ Only the first two layers load in every session. Everything else loads on demand
 
 | Task | Skills loaded |
 |---|---|
-| Marketing website | `ui-ux-design` → `frontend-design` → `visual-direction` → `web-development` (+ `motion`, `threejs-3d`, `seo-content` when in scope) → `testing` |
+| Marketing website | `ui-ux-design` → `frontend-design` → `visual-direction` → `content-copywriting` → `web-development` (+ `motion`, `threejs-3d`, `seo-content` when in scope) → `testing` |
+| Local business website | as above + `seo-content` + `local-seo` |
+| Rewrite page copy | `content-copywriting` |
 | dApp | `web3-development` + `security` + `testing` (+ design and `web-development` skills for the UI) |
 | Backend bug | `web-development` + `debugging` (+ `testing`, `security` when relevant) |
 | Research question | `research` |
@@ -111,10 +115,11 @@ claude-engineering-skills/
 ├── scripts/
 │   └── validate.py           Repository validator (Python standard library, no network)
 └── skills/
-    ├── automation-bots/   debugging/        frontend-design/   motion/
-    ├── prompt-engineering/ research/        security/          seo-content/
-    ├── testing/           threejs-3d/       ui-ux-design/      visual-direction/
-    └── web-development/   web3-development/
+    ├── automation-bots/   content-copywriting/ debugging/      frontend-design/
+    ├── local-seo/         motion/           prompt-engineering/ research/
+    ├── security/          seo-content/      testing/           threejs-3d/
+    ├── ui-ux-design/      visual-direction/ web-development/
+    └── web3-development/
 ```
 
 Each skill folder holds a `SKILL.md`. It may also hold a `references/` folder, and skills with third-party material also have `SOURCE.md` and the original LICENSE/NOTICE files.
@@ -202,9 +207,9 @@ sed -e '/^## This repo/,$d' -e "s|{{MEMORY_ROOT}}|$(pwd)/memory|" CLAUDE.md > ~/
    ```
    python scripts/validate.py --installed
    ```
-   Expected result: `14 skills, 0 errors`. This confirms that every installed file matches the repo and that the installed `CLAUDE.md` has a real memory path.
+   Expected result: `16 skills, 0 errors`. This confirms that every installed file matches the repo and that the installed `CLAUDE.md` has a real memory path.
 2. In Claude Code, run `/memory`. The list should include `~/.claude/CLAUDE.md`.
-3. Ask Claude Code: *"Which skills from ~/.claude/skills do you have?"* It should list all 14.
+3. Ask Claude Code: *"Which skills from ~/.claude/skills do you have?"* It should list all 16.
 
 ---
 
@@ -228,11 +233,12 @@ These apply to every website, web app, dApp, frontend, and backend project unles
 
 | Default | Rule |
 |---|---|
-| **Responsive design** | Every UI works on mobile, tablet, laptop, and desktop. It is checked at 360, 768, 1024, and 1440 px. |
+| **Responsive design** | Every UI works on mobile, tablet, laptop, and desktop. The rendered page is checked at 360, 768, 1024, and 1440 px (screenshots reviewed when a browser tool is available; otherwise reported as not checked). |
 | **JavaScript** | No TypeScript unless requested. Existing TypeScript projects stay TypeScript. |
 | **No Python** | Only when genuinely required with no reasonable alternative, and the reason is stated. |
 | **Clean projects** | No leftover screenshots, mockups, temporary assets, dead code, or unneeded files or dependencies. Pre-existing files are only removed after asking. |
-| **Accuracy** | No invented APIs, versions, facts, sources, or business details; unverified claims are labeled. |
+| **Accuracy** | No invented APIs, versions, facts, sources, or business details (testimonials, reviews, stats, prices, guarantees); missing facts become `[CONFIRM: ...]` placeholders; unverified claims are labeled. |
+| **Evidence** | Tests, builds, deployments, and visual checks are reported as passed, failed, or not run; nothing is claimed that didn't run. |
 | **Safety** | No secrets in code or memory. Irreversible or outward actions require confirmation. |
 | **Original design** | Each UI project gets its own visual direction (recorded in memory); no reused or generic AI layouts across projects. An existing brand or design system wins. |
 | **Icons** | One consistent, maintained icon family per project; no emoji icons; official brand logos only; only the icons used are imported. |
@@ -279,7 +285,7 @@ Format and rules: [`memory/README.md`](memory/README.md).
 | pbakaus/impeccable (from ehmo/platform-design-skills) | `ui-ux-design/references` | Apache-2.0 (+ MIT) |
 | greensock/gsap-skills | `motion/references/gsap` | MIT |
 | vercel-labs/agent-skills | `web-development/references/react` | MIT |
-| coreyhaines31/marketingskills | `seo-content/references` | MIT |
+| coreyhaines31/marketingskills | `seo-content/references`, `content-copywriting/references` | MIT |
 | daymade/claude-code-skills | `research/references` | MIT |
 | mattpocock/skills | `debugging/references/hard-bugs.md` | MIT |
 | supabase/agent-skills | `web-development/references/postgres` | MIT |
@@ -322,7 +328,7 @@ Clone the repo and run the full installation. Memory entries don't travel with g
    ---
    ```
 2. Add only domain-specific rules. Global rules belong in `CLAUDE.md`.
-3. Add the skill to the skill list under **Skills** in `CLAUDE.md` so routing knows its role.
+3. Add the skill to the skill list under **Skills** in `CLAUDE.md` so routing knows its role (the validator errors if it's missing).
 4. Put long material in `references/` and point to it from `SKILL.md`.
 5. Validate, reinstall, restart.
 

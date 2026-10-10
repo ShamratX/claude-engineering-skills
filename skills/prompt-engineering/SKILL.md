@@ -1,6 +1,6 @@
 ---
 name: prompt-engineering
-description: Write, improve, or debug prompts as a deliverable - system prompts, agent and tool instructions, LLM pipeline prompts, evaluation rubrics, and prompts for image or code generation tools. Also use when the user asks to rewrite or sharpen their own request. Not for routine task clarification (CLAUDE.md workflow step 1 handles that) or general copywriting (seo-content).
+description: Write, improve, or debug prompts as a deliverable - system prompts, agent and tool instructions, LLM pipeline prompts, evaluation rubrics, and prompts for image or code generation tools. Also use when the user asks to rewrite or sharpen their own request. Not for routine task clarification (CLAUDE.md workflow step 1 handles that) or website/marketing copy (content-copywriting).
 ---
 
 # Prompt Engineering

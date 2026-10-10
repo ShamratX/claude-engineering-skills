@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Write, fix, or run unit, integration, end-to-end, and smart contract tests; coverage; flaky tests; test setup. Use when adding tests or verifying a change with tests. If a test fails because the code is broken, use debugging.
+description: Write, fix, or run unit, integration, end-to-end, and smart contract tests; coverage; flaky tests; test setup; pre-delivery QA checklists for websites, smart contracts, and bots. Use when adding tests, verifying a change, or checking work before calling it done. If a test fails because the code is broken, use debugging.
 ---
 
 # Testing
@@ -25,5 +25,9 @@ description: Write, fix, or run unit, integration, end-to-end, and smart contrac
 - **Smart contracts:** fresh state per test (fixtures, `setUp`); assert reverts/custom errors, events, balance changes; access control with non-owner accounts; time manipulation for time-based logic; fuzz/invariant tests for math; fork tests for live-protocol integrations.
 - **Flaky:** find the nondeterminism (timing, order, shared state, real network). Never mask with sleeps or retries.
 
+## Pre-delivery QA
+Before calling a feature, page, or project done, run the checklist for its type in `references/qa-checklists.md`: website, Web3/smart contracts, or automation/bots. Use only the sections that apply; skip items the project doesn't have and say which.
+
 ## Rules
 Never delete, weaken, or skip a failing test to get green, or change an assertion to match buggy output. If the test is wrong, say why. Report pass/fail/skip counts and each failure.
+Evidence only: a test, build, deploy, verification, or visual check counts as done only if it actually ran in this session and its output was read. Report each check as passed, failed, or not run (with the reason).

@@ -129,6 +129,13 @@ def check_claude_md():
     return text
 
 
+def check_routing(claude_text, skills):
+    """Every skill must be named in CLAUDE.md so routing knows its role."""
+    for name in skills:
+        if f"`{name}`" not in claude_text:
+            err(f"CLAUDE.md: skill '{name}' not listed under ## Skills")
+
+
 def check_duplicates(claude_text, skills):
     """Flag long identical lines shared by CLAUDE.md and skills, or by two skills."""
     seen = {}
@@ -229,6 +236,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     skills = check_skills()
     claude_text = check_claude_md()
+    check_routing(claude_text, skills)
     check_duplicates(claude_text, skills)
     check_memory()
     check_secrets()

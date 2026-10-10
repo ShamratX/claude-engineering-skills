@@ -14,6 +14,15 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 - **Styling:** infer the system from the file being edited; read theme/tokens only when changing them.
 - **CMS:** identify CMS + version; read the theme/plugin/schema file tied to the task, never CMS core.
 - **Postgres** (schema, migrations, indexes, RLS, slow queries, connections, locking): `references/postgres/index.md` lists rules by impact; read only the matching rule files in that folder.
+- **UI work:** existing design tokens, shared components, layout shell, fonts, and icon set; any reference designs, brand assets, or screenshots the user supplied (look at them, don't just list them).
+
+## Design before code
+New pages, redesigns, or substantial UI (skip for small fixes inside an existing design):
+1. **Brief:** business, audience, the visitor's intent, the page's single conversion goal, and fixed constraints (brand, existing design system, content, stack). Missing and it changes the design → ask; otherwise state the assumption.
+2. **Direction:** if the project has no recorded visual direction, set one with `ui-ux-design` (structure, flows, states) and `frontend-design` (type, color, composition), plus `visual-direction` for imagery, before writing substantial UI code. Write it down as a few concrete lines: type pairing and scale, color tokens, spacing scale, grid, component character, image treatment, motion stance.
+3. **Content first:** real or client-confirmed copy (`content-copywriting`) drives the layout; no lorem ipsum in delivered work, and sections exist because the content needs them, not to fill a template.
+4. **Existing design system wins:** extend its tokens and components; don't replace a working system or restyle unrelated pages. Changing it → explain why and ask.
+5. **Every breakpoint is designed:** decide what changes at mobile, tablet, and desktop (navigation, column count, image crops, type scale, CTA placement), not just what stacks.
 
 ## Build
 - Match the existing framework, router, state, data fetching, and styling. New dependency → state why existing ones can't do it.
@@ -23,8 +32,19 @@ description: Build or change websites, frontends, backends, APIs, and CMS sites 
 - **Backend:** validate input at the boundary with the project's validator; consistent response shape and correct status codes; no stack traces to clients; parameterized queries/ORM; server-side authorization; paginate lists; timeouts on outbound calls.
 - **Performance:** fix measured or obvious issues (N+1, requests in loops, oversized bundles/images). No speculative memoization or caching.
 
+- **Consistency:** spacing, type, color, radius, and shadow from tokens, not one-off values; one component per pattern (buttons, cards, form fields) reused everywhere.
+
 ## Verify
-Project scripts only. UI change → load the page in the dev server, check the console, and check widths 360, 768, 1024, and 1440 px (browser responsive mode or screenshots); otherwise say it wasn't checked. API change → one real request.
+Project scripts only (build, lint, tests). API change → one real request.
+
+**UI change → visual verification on the rendered page:**
+1. Run the dev or preview server; load each changed page; check the console and failed network requests.
+2. When a browser tool is available (browser MCP/extension, or Playwright/Puppeteer already in the project), capture screenshots at 360, 768, 1024, and 1440 px wide, full page, and look at them. Don't add a dependency only for screenshots without asking. Save screenshots outside the project (scratchpad/temp) and delete them afterwards.
+3. Look for and fix: horizontal overflow, overlapping or clipped elements, broken or distorted images, unreadable contrast, cramped or uneven spacing, orphaned headings, inconsistent components, tap targets too small, sticky elements covering content.
+4. Exercise the primary flow: navigation (including the mobile menu), links, forms (valid, invalid, submit), primary CTA.
+5. Full pre-delivery checklist: `testing` skill (website QA).
+
+No browser or screenshot available → say exactly which visual checks were not performed. Never describe a layout as verified from reading code alone.
 
 ## Pitfalls
 - `NEXT_PUBLIC_*` / `VITE_*` vars ship to the client: no secrets.
